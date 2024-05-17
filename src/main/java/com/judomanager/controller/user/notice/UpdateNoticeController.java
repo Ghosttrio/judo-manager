@@ -1,0 +1,24 @@
+package com.judomanager.controller.user.notice;
+
+import com.judomanager.common.JMResponse;
+import com.judomanager.dto.notice.request.UpdateNoticeRequest;
+import com.judomanager.service.notice.UpdateNoticeService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+@Slf4j
+@RestController
+@RequiredArgsConstructor
+public class UpdateNoticeController {
+
+    private final UpdateNoticeService noticeService;
+
+    // 도장별 공지사항 수정
+    @PatchMapping("/api/v1/notices/{noticeId}")
+    public JMResponse<Void> updateNotice(@PathVariable Long noticeId,
+                             @RequestBody UpdateNoticeRequest request){
+        noticeService.updateNotice(noticeId, request.title(), request.content());
+        return JMResponse.ok();
+    }
+}

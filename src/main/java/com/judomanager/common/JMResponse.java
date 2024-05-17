@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 
 @Getter
-@JsonPropertyOrder({"success", "data"})
+@JsonPropertyOrder({"success.html", "data"})
 @JsonInclude(JsonInclude.Include.NON_NULL) // null인 데이터 제외
 public class JMResponse<T> {
     private final Boolean success;

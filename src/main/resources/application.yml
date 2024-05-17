@@ -13,6 +13,13 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+
+# tosspayment
+toss:
+  key: test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6
+
+
 #        dialect: org.hibernate.dialect.MySQLDialect
 #  data:
 #    redis:

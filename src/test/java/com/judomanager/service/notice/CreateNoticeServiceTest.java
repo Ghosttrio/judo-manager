@@ -16,6 +16,7 @@ import static org.mockito.Mockito.times;
 
 
 class CreateNoticeServiceTest extends MockitoSupport {
+
     @InjectMocks
     protected CreateNoticeService createNoticeService;
     @Mock

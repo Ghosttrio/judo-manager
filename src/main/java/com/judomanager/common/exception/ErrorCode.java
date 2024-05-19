@@ -25,6 +25,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(NOT_FOUND, "해당 회원이 존재하지 않습니다."),
     DOJO_NOT_FOUND(NOT_FOUND, "해당 도장이 존재하지 않습니다."),
     NOTICE_NOT_FOUND(NOT_FOUND, "해당 공지사항이 존재하지 않습니다."),
+    POST_NOT_FOUND(NOT_FOUND, "해당 게시글이 존재하지 않습니다."),
 
     // 409 중복 오류
     USER_DUPLICATE(CONFLICT, "중복된 회원입니다."),

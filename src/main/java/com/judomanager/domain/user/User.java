@@ -25,8 +25,10 @@ public class User extends BaseEntity {
 
     private Long dojoId; // 본인이 속한 도장 id
 
-    private String mail; // 카카오 로그인 메일
+    private String email; // 카카오 로그인 메일
 
     private String deleted;
+
+    private String phone;
 
 }

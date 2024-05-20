@@ -6,6 +6,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.judomanager.domain.user.QUser.user;
 
@@ -18,5 +19,10 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
     @Override
     public List<User> findAllUserByDojoId(Long dojoId) {
         return query.selectFrom(user).where(user.dojoId.eq(dojoId)).fetch();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(query.selectFrom(user).where(user.email.eq(email)).fetchOne());
     }
 }

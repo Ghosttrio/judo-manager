@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/dojos")
 @Tag(name = "관리자 도장 조회 컨트롤러")
-public class LoadDojoController {
+public class LoadDojoControllerAdmin {
 
     private final LoadDojoService loadDojoService;
 

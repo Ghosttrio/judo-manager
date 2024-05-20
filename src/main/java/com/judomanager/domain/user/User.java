@@ -29,6 +29,8 @@ public class User extends BaseEntity {
 
     private String deleted;
 
-    private String phone;
+    public static User init(String email) {
+        return new User(null, "이름", UserRole.MEMBER, null, email,null);
+    }
 
 }

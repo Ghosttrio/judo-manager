@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/dojos")
 @Tag(name = "관리자 도장 수정 컨트롤러")
-public class UpdateDojoController {
+public class UpdateDojoControllerAdmin {
 
     private final UpdateDojoService updateDojoService;
 

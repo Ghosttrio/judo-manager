@@ -22,9 +22,10 @@ public class Dojo extends BaseEntity {
     private String location;
 
     private DojoState state; // 도장 현재 상태
+    private String phone; // 관장님 전화번호
 
-    public static Dojo create(Long masterId, String name, String location){
-        return new Dojo(null, masterId, name, location, DojoState.PENDING);
+    public static Dojo create(Long masterId, String name, String location, String phone){
+        return new Dojo(null, masterId, name, location, DojoState.PENDING, phone);
     }
 
     public void updateState(DojoState state) {

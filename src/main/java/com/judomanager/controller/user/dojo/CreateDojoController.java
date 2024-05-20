@@ -23,7 +23,7 @@ public class CreateDojoController {
     // 도장 생성 요청
     @PostMapping
     public JMResponse<Void> creatDojo(@RequestBody CreateDojoRequest request){
-        createDojoService.createDojo(request.masterId(), request.name(), request.location());
+        createDojoService.createDojo(request.masterId(), request.name(), request.location(), request.phone());
         return JMResponse.ok();
     }
 

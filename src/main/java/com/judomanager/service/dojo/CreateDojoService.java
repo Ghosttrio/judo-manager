@@ -14,8 +14,8 @@ public class CreateDojoService {
     private final DojoRepository dojoRepository;
 
     @Transactional
-    public void createDojo(Long masterId, String name, String location){
-        Dojo dojo = Dojo.create(masterId, name, location);
+    public void createDojo(Long masterId, String name, String location, String phone){
+        Dojo dojo = Dojo.create(masterId, name, location, phone);
         dojoRepository.save(dojo);
     }
 

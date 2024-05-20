@@ -14,6 +14,6 @@ public class Chat {
     private Long id;
 
     private Long userId;
-    private Long chatId;
+    private Long chatRoomId;
 
 }

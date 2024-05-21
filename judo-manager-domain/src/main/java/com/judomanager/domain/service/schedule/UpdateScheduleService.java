@@ -1,0 +1,20 @@
+package com.judomanager.domain.service.schedule;
+
+import com.judomanager.domain.domain.schedule.Schedule;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class UpdateScheduleService {
+
+    private final LoadScheduleService loadScheduleService;
+
+    @Transactional
+    public void update(Long scheduleId, String title, String content){
+        Schedule schedule = loadScheduleService.findSchedule(scheduleId);
+        schedule.update(title, content);
+    }
+}

@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.payment.pg;
+package com.judomanager.controller.feign.pg;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;

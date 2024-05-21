@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.payment.pg;
+package com.judomanager.controller.feign.pg;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

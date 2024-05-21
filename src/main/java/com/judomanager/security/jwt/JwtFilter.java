@@ -13,7 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static com.judomanager.common.util.Constant.AUTHORIZATION_HEADER;
+import static com.judomanager.common.util.JudoMangerStatic.AUTHORIZATION_HEADER;
 
 
 @RequiredArgsConstructor

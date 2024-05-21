@@ -1,9 +1,9 @@
 package com.judomanager.service.user;
 
-import com.judomanager.controller.user.user.kakao.KakaoProperties;
-import com.judomanager.controller.user.user.kakao.KakaoTokenClient;
-import com.judomanager.controller.user.user.kakao.KakaoTokenRequest;
-import com.judomanager.controller.user.user.kakao.KakaoUserInfoClient;
+import com.judomanager.common.properties.KakaoProperties;
+import com.judomanager.controller.feign.KakaoTokenClient;
+import com.judomanager.controller.feign.KakaoTokenRequest;
+import com.judomanager.controller.feign.KakaoUserInfoClient;
 import com.judomanager.controller.user.user.response.*;
 import com.judomanager.domain.user.User;
 import com.judomanager.security.jwt.JwtGenerator;
@@ -27,10 +27,12 @@ public class LoginService {
     private final CreateUserService createUserService;
     private final JwtGenerator jwtGenerator;
     private final JwtResolver jwtResolver;
+    private final UpdateUserService updateUserService;
 
     public SigninResponse login(String kakaoCode){
         User user = getUserByKakaoCode(kakaoCode);
         TokenResponse token = createTokenAndSetRedis(user);
+        updateUserService.lastLogin(user.getId());
         return new SigninResponse(user.getId(), token.getAccessToken(), token.getRefreshToken());
     }
 

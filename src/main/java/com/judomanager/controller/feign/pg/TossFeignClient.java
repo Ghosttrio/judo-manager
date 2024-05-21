@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.payment.pg;
+package com.judomanager.controller.feign.pg;
 
 import com.judomanager.config.feign.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;

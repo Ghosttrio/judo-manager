@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.user.kakao;
+package com.judomanager.controller.feign;
 
 
 public record KakaoTokenRequest(

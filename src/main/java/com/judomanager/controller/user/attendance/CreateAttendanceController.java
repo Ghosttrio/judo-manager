@@ -1,8 +1,14 @@
 package com.judomanager.controller.user.attendance;
 
+import com.judomanager.common.JMResponse;
+import com.judomanager.dto.attendance.CreateAttendanceRequest;
+import com.judomanager.security.UserId;
+import com.judomanager.service.attendance.CreateAttendanceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "출석 생성 컨트롤러")
 public class CreateAttendanceController {
 
-//    @PostMapping
-//    public JMResponse<Void> createAttendance(){
-//
-//    }
+    private final CreateAttendanceService createAttendanceService;
+
+    @PostMapping
+    public JMResponse<Void> createAttendance(@UserId Long userId,
+                                             @RequestBody CreateAttendanceRequest request){
+        createAttendanceService.create(userId, request.dojoId(), request.latitude(), request.longitude());
+        return JMResponse.ok();
+    }
+
 }

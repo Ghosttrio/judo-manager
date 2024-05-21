@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.payment.pg;
+package com.judomanager.controller.feign.pg;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

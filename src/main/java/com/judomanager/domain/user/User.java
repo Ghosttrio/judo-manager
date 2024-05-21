@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
-@Entity
+@Entity(name = "tb_user")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
@@ -18,7 +20,7 @@ public class User extends BaseEntity {
     @Column(name = "user_id")
     private Long id;
 
-    private String name;
+    private String nickname;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -29,8 +31,21 @@ public class User extends BaseEntity {
 
     private String deleted;
 
+    private LocalDateTime lastLoginDate;
+
     public static User init(String email) {
-        return new User(null, "이름", UserRole.MEMBER, null, email,null);
+        return new User(null, "이름", UserRole.MEMBER, null, email,null, LocalDateTime.now());
     }
 
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+
+    public void setDojo(Long dojoId){
+        this.dojoId = dojoId;
+    }
+
+    public void updateLoginDate(){
+        this.lastLoginDate = LocalDateTime.now();
+    }
 }

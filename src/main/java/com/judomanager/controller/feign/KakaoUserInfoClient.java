@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.user.kakao;
+package com.judomanager.controller.feign;
 
 import com.judomanager.config.feign.FeignConfig;
 import com.judomanager.controller.user.user.response.KakaoUserInfoResponse;

@@ -1,4 +1,4 @@
-package com.judomanager.config.redis;
+package com.judomanager.common.properties;
 
 import lombok.Getter;
 import lombok.Setter;

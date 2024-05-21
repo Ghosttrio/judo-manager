@@ -1,0 +1,35 @@
+package com.judomanager.controller.user.user;
+
+import com.judomanager.common.JMResponse;
+import com.judomanager.controller.user.user.request.RegisterRequest;
+import com.judomanager.security.UserId;
+import com.judomanager.service.user.UpdateUserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/registers")
+public class RegisterController {
+
+    private final UpdateUserService updateUserService;
+
+
+    @PatchMapping("/nickname")
+    public JMResponse<Void> setNickname(@UserId Long userId,
+                                        @RequestBody RegisterRequest.Nickname request){
+        updateUserService.updateNickname(userId, request.nickname());
+        return JMResponse.ok();
+    }
+
+    @PatchMapping("/dojo")
+    public JMResponse<Void> setDojo(@UserId Long userId,
+                                    @RequestBody RegisterRequest.Dojo request){
+        updateUserService.updateDojo(userId, request.dojoCode());
+        return JMResponse.ok();
+    }
+
+}

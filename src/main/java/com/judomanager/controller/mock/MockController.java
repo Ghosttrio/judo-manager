@@ -1,10 +1,9 @@
 package com.judomanager.controller.mock;
 
-import com.judomanager.controller.user.user.kakao.KakaoProperties;
+import com.judomanager.common.properties.KakaoProperties;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +26,6 @@ public class MockController {
     @Tag(name = "[Mock] 카카오 로그인 주소 발급 API")
     @GetMapping("/login")
     public String loadKakaoLoginUrl() {
-//        Environment environment = new Environment();
         return "https://kauth.kakao.com/oauth/authorize?client_id="+kakaoProperties.getClient_id()
                 +"&redirect_uri="+"http://localhost:8080/mock"+"&response_type=code";
     }

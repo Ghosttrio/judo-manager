@@ -1,7 +1,7 @@
 package com.judomanager.controller.user.user;
 
 import com.judomanager.common.JMResponse;
-import com.judomanager.common.util.Constant;
+import com.judomanager.common.util.JudoMangerStatic;
 import com.judomanager.controller.user.user.request.LoginRequest;
 import com.judomanager.controller.user.user.request.RefreshRequest;
 import com.judomanager.controller.user.user.response.*;
@@ -31,7 +31,7 @@ public class LoginController {
     @Operation(summary = "카카오 메일 정보와 만료된 액세스 토큰으로 다시 액세스 토큰을 발급한다.")
     @PostMapping("/refresh")
     public JMResponse<String> refresh(@RequestBody RefreshRequest request,
-                                      @RequestHeader(Constant.AUTHORIZATION_HEADER) String requestAccessToken){
+                                      @RequestHeader(JudoMangerStatic.AUTHORIZATION_HEADER) String requestAccessToken){
         String accessToken = loginService.refresh(request.getEmail(), requestAccessToken);
 
         return JMResponse.ok(accessToken);

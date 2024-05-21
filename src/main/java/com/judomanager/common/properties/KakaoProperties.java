@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.user.kakao;
+package com.judomanager.common.properties;
 
 import lombok.Getter;
 import lombok.Setter;

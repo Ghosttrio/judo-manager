@@ -1,5 +1,6 @@
 package com.judomanager.service.dojo;
 
+import com.judomanager.common.exception.ErrorCode;
 import com.judomanager.common.exception.JMException;
 import com.judomanager.domain.dojo.Dojo;
 import com.judomanager.domain.user.User;
@@ -31,5 +32,10 @@ public class LoadDojoService {
 
     public List<User> findAllUserByDojoId(Long dojoId){
         return loadUserService.findAllUserByDojoId(dojoId);
+    }
+
+    public Dojo findByDojoCode(String dojoCode){
+        return dojoRepository.findByDojoCode(dojoCode)
+                .orElseThrow(() -> new JMException(DOJO_NOT_FOUND));
     }
 }

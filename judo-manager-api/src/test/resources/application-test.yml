@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MySQL
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+#      password: ghosttrio
+#  kafka:
+#    bootstrap-servers: localhost:9092
+
+logging:
+  level:
+    root: info
+    org.hibernate.sql: info
+
+#jwt:
+#  secret: ovaod9uvoqejicoajewiodu9weru09qewur023avkdsncasodfjowefjoiqew2314325ihfoisdufadsvdoufwqeurojqw09re920cjfosdfpqeroipsa
+#
+#
+#kakao:
+#  client-id: e61b4777d43816865bfbebc87c30aa9b
+#  client-secret: x0XT6o350cZAqvzWZmVGlj2I1iIZQBS4
+#  redirect-uri: http://localhost:3000/kakao-login
+#  grant-type: authorization_code
+#  token-uri: https://kauth.kakao.com/oauth/token
+#  user-info-uri: https://kapi.kakao.com/v2/user/me
+#
+## 서울올림픽기념국민체육진흥공단_전국체육시설 정보
+#openapi:
+#  service-key: q%2Bw9XJuMYzpleNB0aakzjv2xb4FiCkonkfZHklyscGOrPFroAqHqei1C4AVq9M%2FTRQPtqGH7qCDTtl1vSAuo8A%3D%3D
+#  base-uri: https://apis.data.go.kr/B551014/SRVC_API_SFMS_FACI

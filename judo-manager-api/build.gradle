@@ -1,0 +1,14 @@
+tasks.named('bootJar'){
+    enabled = true
+}
+
+tasks.named('jar'){
+    enabled = false
+}
+
+dependencies {
+    implementation project(':judo-manager-common')
+    implementation project(':judo-manager-domain')
+    implementation project(':judo-manager-infrastructure')
+}
+

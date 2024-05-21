@@ -13,4 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "결제 조회 컨트롤러")
 public class LoadPaymentController {
 
+    /** PG사(Tosspayment) 연동 */
 }

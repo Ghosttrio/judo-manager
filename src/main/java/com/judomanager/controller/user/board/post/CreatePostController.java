@@ -3,6 +3,7 @@ package com.judomanager.controller.user.board.post;
 import com.judomanager.common.JMResponse;
 import com.judomanager.dto.board.CreatePostRequest;
 import com.judomanager.service.board.CreatePostService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,8 @@ public class CreatePostController {
 
     private final CreatePostService createPostService;
 
+    @Tag(name = "게시글 생성 API")
+    @Operation(summary = "게시판 특정 카테고리에 글을 생성한다.")
     @PostMapping("/{boardId}/posts")
     public JMResponse<Void> createPost(@PathVariable Long boardId,
                                  @RequestBody CreatePostRequest request){

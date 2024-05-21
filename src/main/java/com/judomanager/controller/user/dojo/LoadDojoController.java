@@ -3,6 +3,7 @@ package com.judomanager.controller.user.dojo;
 import com.judomanager.common.JMResponse;
 import com.judomanager.domain.user.User;
 import com.judomanager.service.dojo.LoadDojoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,8 @@ public class LoadDojoController {
 
     private final LoadDojoService loadDojoService;
 
-    // 도장 별 회원 전체 조회
+    @Tag(name = "도장 생성 API")
+    @Operation(summary = "각 도장에 등록되어 있는 회원을 모두 조회한다.")
     @GetMapping("/{dojoId}")
     public JMResponse<List<User>> loadDojoUser(@PathVariable Long dojoId){
         List<User> result = loadDojoService.findAllUserByDojoId(dojoId);

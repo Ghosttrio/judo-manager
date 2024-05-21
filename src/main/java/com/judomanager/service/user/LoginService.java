@@ -1,26 +1,19 @@
 package com.judomanager.service.user;
 
-import com.judomanager.common.JMResponse;
-import com.judomanager.common.exception.ErrorCode;
 import com.judomanager.controller.user.user.kakao.KakaoProperties;
 import com.judomanager.controller.user.user.kakao.KakaoTokenClient;
 import com.judomanager.controller.user.user.kakao.KakaoTokenRequest;
 import com.judomanager.controller.user.user.kakao.KakaoUserInfoClient;
 import com.judomanager.controller.user.user.response.*;
 import com.judomanager.domain.user.User;
-import com.judomanager.domain.user.UserRole;
-import com.judomanager.repository.user.UserRepository;
 import com.judomanager.security.jwt.JwtGenerator;
 import com.judomanager.security.jwt.JwtResolver;
-import com.judomanager.service.redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -41,11 +34,11 @@ public class LoginService {
         return new SigninResponse(user.getId(), token.getAccessToken(), token.getRefreshToken());
     }
 
-    public TokenResponse createTokenAndSetRedis(User user){
+    private TokenResponse createTokenAndSetRedis(User user){
         return jwtGenerator.createToken(user.getId(), user.getEmail(), user.getRole().toString());
     }
 
-    public User getUserByKakaoCode(String kakaoCode){
+    private User getUserByKakaoCode(String kakaoCode){
         KakaoTokenResponse response = kakaoTokenClient.authorize(new KakaoTokenRequest(
                 kakaoProperties.getClient_id(),
                 kakaoProperties.getClient_secret(),

@@ -1,6 +1,6 @@
 package com.judomanager.controller.user.user.kakao;
 
-import com.judomanager.controller.user.payment.pg.FeignConfig;
+import com.judomanager.config.feign.FeignConfig;
 import com.judomanager.controller.user.user.response.KakaoUserInfoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

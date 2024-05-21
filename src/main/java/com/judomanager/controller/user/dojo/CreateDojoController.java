@@ -3,6 +3,7 @@ package com.judomanager.controller.user.dojo;
 import com.judomanager.common.JMResponse;
 import com.judomanager.dto.dojo.CreateDojoRequest;
 import com.judomanager.service.dojo.CreateDojoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,8 @@ public class CreateDojoController {
 
     private final CreateDojoService createDojoService;
 
-    // 도장 생성 요청
+    @Tag(name = "도장 생성 API")
+    @Operation(summary = "관장님이 나의 도장을 생성한다.")
     @PostMapping
     public JMResponse<Void> creatDojo(@RequestBody CreateDojoRequest request){
         createDojoService.createDojo(request.masterId(), request.name(), request.location(), request.phone());

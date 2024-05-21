@@ -3,6 +3,7 @@ package com.judomanager.controller.user.board.post;
 import com.judomanager.common.JMResponse;
 import com.judomanager.dto.board.UpdatePostRequest;
 import com.judomanager.service.board.UpdatePostService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,8 @@ public class UpdatePostController {
 
     private final UpdatePostService updatePostService;
 
+    @Tag(name = "게시글 수정 API")
+    @Operation(summary = "게시판 글을 수정한다.")
     @PatchMapping("/posts/{postId}")
     public JMResponse<Void> createPost(@PathVariable Long postId,
                                        @RequestBody UpdatePostRequest request){

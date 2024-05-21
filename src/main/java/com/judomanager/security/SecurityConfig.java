@@ -26,7 +26,7 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final CorsConfigurationSource corsConfigurationSource;
     private final String[] allowUrls = {
-            "/mock", "/api/v1/login"
+            "/mock/**", "/api/v1/auth/login"
     };
 
     @Bean

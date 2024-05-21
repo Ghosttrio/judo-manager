@@ -1,4 +1,4 @@
-package com.judomanager.controller.user.payment.pg;
+package com.judomanager.config.feign;
 
 import feign.Logger;
 import feign.RequestInterceptor;

@@ -22,11 +22,8 @@ public class CreateNoticeController {
 
     private final CreateNoticeService noticeService;
 
-    @Operation(summary = "도장별 공지사항 조회 API", responses = {
-            @ApiResponse(responseCode = "200", description = "성공"),
-            @ApiResponse(responseCode = "400", description = "실패",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-    })
+    @Tag(name = "도장별 공지사항 조회 API")
+    @Operation(summary = "각 도장에 등록되어 있는 공지사항을 모두 조회한다.")
     @PostMapping("/{dojoId}")
     public JMResponse<Void> createNotice(@PathVariable Long dojoId,
                                    @RequestBody CreateNoticeRequest request){

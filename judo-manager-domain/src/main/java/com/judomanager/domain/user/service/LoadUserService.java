@@ -25,4 +25,8 @@ public class LoadUserService {
     public List<User> findAllUserByDojoId(Long dojoId){
         return userRepository.findAllUserByDojoId(dojoId);
     }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
 }

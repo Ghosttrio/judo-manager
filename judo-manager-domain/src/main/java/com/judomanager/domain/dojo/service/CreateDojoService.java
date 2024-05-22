@@ -3,7 +3,7 @@ package com.judomanager.domain.dojo.service;
 import com.judomanager.common.properties.OpenApiProperties;
 import com.judomanager.domain.dojo.domain.Dojo;
 import com.judomanager.domain.dojo.repository.DojoRepository;
-import com.judomanager.infrastructure.feign.OpenApiClient;
+import com.judomanager.infrastructure.feign.openapi.client.JudoCenterClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ public class CreateDojoService {
 
     private final DojoRepository dojoRepository;
     private final OpenApiProperties openApiProperties;
-    private final OpenApiClient openApiClient;
+    private final JudoCenterClient judoCenterClient;
 
 
     @Transactional
@@ -35,7 +35,7 @@ public class CreateDojoService {
     // todo string to json 연구
     @Transactional
     public void createAllDojo(){
-        String json = openApiClient.getAllDojo(
+        String json = judoCenterClient.getAllDojo(
                 openApiProperties.getService_key(),
                 1,
                 1000,

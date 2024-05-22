@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/config/:/etc/prometheus/
+      - ./prometheus/prometheus-volume:/prometheus
+    command:
+      - '--web.enable-lifecycle'
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: always
+    networks:
+      - goodjob-network
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/grafana-volume:/var/lib/grafana
+      - ./grafana/config/grafana-init.ini:/etc/grafana/grafana.ini
+    restart: always
+    user: "$UID:$GID"
+    networks:
+      - goodjob-network
+
+networks:
+  goodjob-network:
+    driver: bridge

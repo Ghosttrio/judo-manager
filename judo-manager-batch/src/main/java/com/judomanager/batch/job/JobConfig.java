@@ -22,9 +22,8 @@ public class JobConfig {
 
     @Bean
     public Job job(JobRepository jobRepository, Step step){
-        return new JobBuilder("myJob", jobRepository)
+        return new JobBuilder("slackJob", jobRepository)
                 .start(step)
-//                .next(step1)
                 .build();
     }
 
@@ -38,7 +37,7 @@ public class JobConfig {
 
     @Bean
     public Step step(JobRepository jobRepository, Tasklet myTasklet, PlatformTransactionManager transactionManager){
-        return new StepBuilder("myStep", jobRepository)
+        return new StepBuilder("slackStep", jobRepository)
                 .tasklet(myTasklet, transactionManager)
                 .build();
     }

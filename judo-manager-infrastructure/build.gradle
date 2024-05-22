@@ -1,13 +1,27 @@
 tasks.named('bootJar'){
-	enabled = true
+	enabled = false
 }
 
 tasks.named('jar'){
-	enabled = false
+	enabled = true
 }
 
 dependencies {
 	implementation project(':judo-manager-common')
-	implementation project(':judo-manager-domain')
+	// open feign
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
+	implementation 'org.springframework.cloud:spring-cloud-commons:4.1.1'
+
+	// slack
+	implementation("com.slack.api:bolt:1.18.0")
+	implementation("com.slack.api:bolt-servlet:1.18.0")
+	implementation("com.slack.api:bolt-jetty:1.18.0")
+
+	// excel
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 }
 

@@ -1,6 +1,6 @@
 package com.judomanager.api.security.jwt;
 
-import com.judomanager.common.common.exception.JMException;
+import com.judomanager.common.exception.JMException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static com.judomanager.common.common.util.JudoMangerStatic.AUTHORIZATION_HEADER;
+import static com.judomanager.common.util.JudoMangerStatic.AUTHORIZATION_HEADER;
 
 
 @RequiredArgsConstructor

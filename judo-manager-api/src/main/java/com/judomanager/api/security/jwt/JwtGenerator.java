@@ -1,10 +1,10 @@
 package com.judomanager.api.security.jwt;
 
-import com.judomanager.api.controller.user.user.response.TokenResponse;
+import com.judomanager.api.presentation.user.response.TokenResponse;
 import com.judomanager.api.security.CustomUserDetailsService;
-import com.judomanager.common.common.exception.ErrorCode;
-import com.judomanager.common.common.exception.JMException;
-import com.judomanager.domain.service.redis.RedisService;
+import com.judomanager.common.exception.ErrorCode;
+import com.judomanager.common.exception.JMException;
+import com.judomanager.infrastructure.redis.RedisService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -17,13 +17,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.security.SignatureException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-import static com.judomanager.common.common.exception.ErrorCode.EXPIRED_REFRESH_TOKEN;
+import static com.judomanager.common.exception.ErrorCode.EXPIRED_REFRESH_TOKEN;
 
 @Component
 @Slf4j

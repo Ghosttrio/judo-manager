@@ -1,7 +1,7 @@
 //package com.judomanager.api.service.notice;
 //
 //import com.judomanager.config.MockitoSupport;
-//import com.judomanager.domain.notice.Notice;
+//import com.judomanager.domain.notice.domain.Notice;
 //import com.judomanager.domain.service.notice.CreateNoticeService;
 //import com.judomanager.repository.notice.NoticeRepository;
 //import com.judomanager.service.dojo.LoadDojoService;

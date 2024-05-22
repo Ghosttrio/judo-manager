@@ -28,13 +28,19 @@ public class QDojo extends EntityPathBase<Dojo> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final NumberPath<Double> latitude = createNumber("latitude", Double.class);
+
     public final StringPath location = createString("location");
+
+    public final NumberPath<Double> longitude = createNumber("longitude", Double.class);
 
     public final NumberPath<Long> masterId = createNumber("masterId", Long.class);
 
     public final StringPath name = createString("name");
 
     public final StringPath phone = createString("phone");
+
+    public final NumberPath<Double> radius = createNumber("radius", Double.class);
 
     public final EnumPath<DojoState> state = createEnum("state", DojoState.class);
 

@@ -3,7 +3,7 @@ package com.judomanager.domain.dojo.service;
 import com.judomanager.common.exception.JMException;
 import com.judomanager.domain.dojo.domain.Dojo;
 import com.judomanager.domain.dojo.domain.DojoState;
-import com.judomanager.domain.dojo.repository.DojoRepository;
+import com.judomanager.domain.dojo.repository.dojo.DojoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

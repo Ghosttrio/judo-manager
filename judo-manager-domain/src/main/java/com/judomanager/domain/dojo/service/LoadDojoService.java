@@ -2,7 +2,8 @@ package com.judomanager.domain.dojo.service;
 
 import com.judomanager.common.exception.JMException;
 import com.judomanager.domain.dojo.domain.Dojo;
-import com.judomanager.domain.dojo.repository.DojoRepository;
+import com.judomanager.domain.dojo.repository.dojo.DojoRepository;
+import com.judomanager.domain.dojo.repository.dojo.projections.DojoCoordinateDto;
 import com.judomanager.domain.user.domain.User;
 import com.judomanager.domain.user.service.LoadUserService;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,10 @@ public class LoadDojoService {
     public Dojo findByDojoCode(String dojoCode){
         return dojoRepository.findByDojoCode(dojoCode)
                 .orElseThrow(() -> new JMException(DOJO_NOT_FOUND));
+    }
+
+
+    public DojoCoordinateDto findDojoCoordinate(Long dojoId){
+        return dojoRepository.findDojoCoordinate(dojoId);
     }
 }

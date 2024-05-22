@@ -21,14 +21,12 @@ public class QPayment extends EntityPathBase<Payment> {
 
     public final com.judomanager.domain.common.QBaseEntity _super = new com.judomanager.domain.common.QBaseEntity(this);
 
-    public final StringPath amount = createString("amount");
-
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath product = createString("product");
+    public final NumberPath<Long> productId = createNumber("productId", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;

@@ -21,6 +21,7 @@ public class CreatePaymentController {
     private final CreatePaymentService createPaymentService;
 
     /** 도장 별 결제 정보 등록, 개월 수, 금액 */
+    // 만약 회원권이 있는데 추가로 결제하면 LessonPass의 시간 업데이트
     @PostMapping
     public JMResponse<Void> createProduct(@RequestBody CreateProductRequest request){
         createPaymentService.create(request.dojoId(), request.name(), request.amount(), request.month());

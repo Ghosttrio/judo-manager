@@ -25,7 +25,14 @@ public class CreateDojoController {
     @Operation(summary = "관장님이 나의 도장을 생성한다.")
     @PostMapping
     public JMResponse<Void> creatDojo(@RequestBody CreateDojoRequest request){
-        createDojoService.createDojo(request.masterId(), request.name(), request.location(), request.phone());
+        createDojoService.createDojo(
+                request.masterId(),
+                request.name(),
+                request.location(),
+                request.phone(),
+                request.latitude(),
+                request.longitude(),
+                request.radius());
         return JMResponse.ok();
     }
 

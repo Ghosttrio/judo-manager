@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity(name = "tb_attendance")
 @Getter
 @AllArgsConstructor
@@ -23,8 +25,10 @@ public class Attendance extends BaseEntity {
     @Enumerated
     private Approval approval;
 
-    public static Attendance create(Long userId, Long dojoId){
-        return new Attendance(null, userId, dojoId, Approval.APPROVED);
+    private LocalDateTime attendanceTime;
+
+    public static Attendance create(Long userId, Long dojoId, LocalDateTime attendanceTime){
+        return new Attendance(null, userId, dojoId, Approval.APPROVED, attendanceTime);
     }
 
     public void setApproval(Approval approval) {

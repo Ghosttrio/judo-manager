@@ -19,6 +19,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 public class JobConfig {
 
+    /**
+     * 배치 job 리스트
+     * 1. 슬랙으로 유저 활동 정보 NOTIFICATION
+     * 2. 쌓인 출석 정보를 주기적으로 저장 테이블로 이동
+     */
+
 
     @Bean
     public Job job(JobRepository jobRepository, Step step){

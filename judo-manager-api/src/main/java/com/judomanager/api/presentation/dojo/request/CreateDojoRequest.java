@@ -4,6 +4,9 @@ public record CreateDojoRequest(
         Long masterId,
         String name,
         String location,
-        String phone
+        String phone,
+        Double latitude,
+        Double longitude,
+        Double radius
 ) {
 }

@@ -11,6 +11,9 @@ import static org.springframework.http.HttpStatus.*;
 public enum ErrorCode {
     // 400 요청 오류
     METHOD_BAD_REQUEST(BAD_REQUEST, "400"),
+    INVALID_ATTENDANCE_LOCATION(BAD_REQUEST, "도장에서 설정한 반경 밖에 회원이 있습니다."),
+    INVALID_ATTENDANCE_TIME(BAD_REQUEST, "등록한 레슨 시간과 출석 시간이 맞지 않습니다."),
+    PASS_EXPIRED(BAD_REQUEST, "회원권이 만료되었습니다."),
 
     // 401 인증 오류
     INVALID_BEARER_TOKEN(BAD_REQUEST, "유효한 Bearer 토큰의 형식이 아닙니다."),
@@ -27,6 +30,9 @@ public enum ErrorCode {
     NOTICE_NOT_FOUND(NOT_FOUND, "해당 공지사항이 존재하지 않습니다."),
     POST_NOT_FOUND(NOT_FOUND, "해당 게시글이 존재하지 않습니다."),
     SCHEDULE_NOT_FOUND(NOT_FOUND, "해당 스케줄이 존재하지 않습니다."),
+    ATTENDANCE_NOT_FOUND(NOT_FOUND, "해당 출석이 존재하지 않습니다."),
+    PASS_NOT_FOUND(NOT_FOUND, "해당 회원권이 존재하지 않습니다."),
+    LESSON_NOT_FOUND(NOT_FOUND, "해당 강습이 존재하지 않습니다."),
 
     // 409 중복 오류
     USER_DUPLICATE(CONFLICT, "중복된 회원입니다."),

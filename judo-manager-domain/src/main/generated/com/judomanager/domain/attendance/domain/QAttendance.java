@@ -23,6 +23,8 @@ public class QAttendance extends EntityPathBase<Attendance> {
 
     public final EnumPath<Approval> approval = createEnum("approval", Approval.class);
 
+    public final DateTimePath<java.time.LocalDateTime> attendanceTime = createDateTime("attendanceTime", java.time.LocalDateTime.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 

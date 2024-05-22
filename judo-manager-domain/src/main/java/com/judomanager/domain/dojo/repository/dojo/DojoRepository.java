@@ -1,4 +1,4 @@
-package com.judomanager.domain.dojo.repository;
+package com.judomanager.domain.dojo.repository.dojo;
 
 import com.judomanager.domain.dojo.domain.Dojo;
 import org.springframework.data.jpa.repository.JpaRepository;

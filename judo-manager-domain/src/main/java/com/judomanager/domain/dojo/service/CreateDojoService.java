@@ -2,7 +2,7 @@ package com.judomanager.domain.dojo.service;
 
 import com.judomanager.common.properties.OpenApiProperties;
 import com.judomanager.domain.dojo.domain.Dojo;
-import com.judomanager.domain.dojo.repository.DojoRepository;
+import com.judomanager.domain.dojo.repository.dojo.DojoRepository;
 import com.judomanager.infrastructure.feign.openapi.client.JudoCenterClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,9 @@ public class CreateDojoService {
 
 
     @Transactional
-    public void createDojo(Long masterId, String name, String location, String phone){
+    public void createDojo(Long masterId, String name, String location, String phone, Double latitude, Double longitude, Double radius){
         String dojoCode = generateDojoCode();
-        Dojo dojo = Dojo.create(masterId, name, location, phone, dojoCode);
+        Dojo dojo = Dojo.create(masterId, name, location, phone, dojoCode, latitude, longitude, radius);
         dojoRepository.save(dojo);
     }
 

@@ -3,6 +3,7 @@ package com.judomanager.api.presentation.schedule;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.schedule.domain.Schedule;
 import com.judomanager.domain.schedule.service.LoadScheduleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/schedules")
+@Tag(name = "[Schedule API]")
 public class LoadScheduleController {
 
     private final LoadScheduleService loadScheduleService;

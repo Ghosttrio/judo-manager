@@ -16,11 +16,11 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "[Notice API]")
 public class LoadNoticeController {
 
     private final LoadNoticeService noticeService;
 
-    @Tag(name = "[미사용] 공지사항 전체 조회 API")
     @Operation(summary = "등록되어 있는 공지사항을 모두 조회한다.")
     @GetMapping("/api/v1/notices")
     public JMResponse<List<Notice>> loadAllNotice(){
@@ -28,7 +28,6 @@ public class LoadNoticeController {
         return JMResponse.ok(result);
     }
 
-    @Tag(name = "도장별 공지사항 조회 API")
     @Operation(summary = "각 도장에 등록되어 있는 특정 공지사항을 조회한다.")
     @GetMapping("/api/v1/notices/{dojoId}")
     public JMResponse<List<Notice>> loadAllNoticeByDojoId(@PathVariable Long dojoId){

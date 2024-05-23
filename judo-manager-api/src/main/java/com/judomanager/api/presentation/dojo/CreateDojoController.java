@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/dojos")
-@Tag(name = "도장 생성 컨트롤러")
+@Tag(name = "[Dojo API]")
 public class CreateDojoController {
 
     private final CreateDojoService createDojoService;
 
-    @Tag(name = "도장 생성 API")
     @Operation(summary = "관장님이 나의 도장을 생성한다.")
     @PostMapping
     public JMResponse<Void> creatDojo(@RequestBody CreateDojoRequest request){
@@ -36,7 +35,6 @@ public class CreateDojoController {
         return JMResponse.ok();
     }
 
-    @Tag(name = "도장 DB 생성 API")
     @Operation(summary = "Open API를 이용하여 전국 도장 리스트를 저장한다.")
     @PostMapping("/database/dojo")
     public JMResponse<Void> createAllDojo() {

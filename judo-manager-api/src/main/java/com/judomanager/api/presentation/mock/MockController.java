@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mock")
+@Tag(name = "[Mock API]")
 public class MockController {
 
     private final KakaoProperties kakaoProperties;
@@ -23,7 +24,6 @@ public class MockController {
     }
 
     @Operation(summary = "프론트 프로젝트를 실행하지 않고 카카오 로그인 주소 발급합니다.")
-    @Tag(name = "[Mock] 카카오 로그인 주소 발급 API")
     @GetMapping("/login")
     public String loadKakaoLoginUrl() {
         return "https://kauth.kakao.com/oauth/authorize?client_id="+kakaoProperties.getClient_id()

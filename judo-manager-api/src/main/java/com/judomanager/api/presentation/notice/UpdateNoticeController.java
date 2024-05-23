@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "[Notice API]")
 public class UpdateNoticeController {
 
     private final UpdateNoticeService noticeService;
 
-    @Tag(name = "도장별 공지사항 수정 API")
     @Operation(summary = "각 도장에 등록되어 있는 특정 공지사항을 수정한다.")
     @PatchMapping("/api/v1/notices/{noticeId}")
     public JMResponse<Void> updateNotice(@PathVariable Long noticeId,

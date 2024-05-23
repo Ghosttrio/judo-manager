@@ -18,12 +18,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/boards")
-@Tag(name = "게시판 글 조회 컨트롤러")
+@Tag(name = "[Board API]")
 public class LoadPostController {
 
     private final LoadBoardService loadBoardService;
 
-    @Tag(name = "게시글 조회 API")
     @Operation(summary = "게시판 특정 카테고리의 글을 모두 조회한다.")
     @GetMapping("/{boardId}/posts")
     public JMResponse<List<Post>> loadAllPost(@PathVariable Long boardId){
@@ -31,7 +30,6 @@ public class LoadPostController {
         return JMResponse.ok(result);
     }
 
-    @Tag(name = "게시글 조회 API")
     @Operation(summary = "게시판 특정 카테고리의 글 중 특정 글을 조회한다.")
     @GetMapping("/posts/{postId}")
     public JMResponse<Post> loadPost(@PathVariable Long postId){

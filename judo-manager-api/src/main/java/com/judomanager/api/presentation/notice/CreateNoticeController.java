@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/notices")
-@Tag(name = "공지사항 생성 컨트롤러")
+@Tag(name = "[Notice API]")
 public class CreateNoticeController {
 
     private final CreateNoticeService noticeService;
 
-    @Tag(name = "도장별 공지사항 조회 API")
     @Operation(summary = "각 도장에 등록되어 있는 공지사항을 모두 조회한다.")
     @PostMapping("/{dojoId}")
     public JMResponse<Void> createNotice(@PathVariable Long dojoId,

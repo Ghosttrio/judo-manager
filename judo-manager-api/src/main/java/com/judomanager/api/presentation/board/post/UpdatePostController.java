@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/boards")
-@Tag(name = "게시판 글 수정 컨트롤러")
+@Tag(name = "[Board API]")
 public class UpdatePostController {
 
     private final UpdatePostService updatePostService;
 
-    @Tag(name = "게시글 수정 API")
     @Operation(summary = "게시판 글을 수정한다.")
     @PatchMapping("/posts/{postId}")
     public JMResponse<Void> createPost(@PathVariable Long postId,

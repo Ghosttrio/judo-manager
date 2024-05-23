@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "공지사항 삭제 컨트롤러")
+@Tag(name = "[Notice API]")
 public class DeleteNoticeController {
 
     private final DeleteNoticeService noticeService;
 
-    @Tag(name = "도장별 공지사항 삭제 API")
     @Operation(summary = "각 도장에 등록되어 있는 특정 공지사항을 삭제한다.")
     @DeleteMapping("/api/v1/notices/{noticeId}")
     public JMResponse<Void> deleteNotice(@PathVariable Long noticeId){

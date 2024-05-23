@@ -3,6 +3,7 @@ package com.judomanager.api.presentation.chat;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.chat.domain.Chat;
 import com.judomanager.domain.chat.service.LoadChatService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/chat")
+@Tag(name = "[Chat API]")
 public class LoadChatController {
 
     private final LoadChatService loadChatService;

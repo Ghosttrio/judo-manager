@@ -2,6 +2,7 @@ package com.judomanager.api.presentation.chat;
 
 import com.judomanager.api.presentation.chat.request.CreateChatRoomRequest;
 import com.judomanager.common.exception.JMResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/chat/room")
+@Tag(name = "[Chat API]")
 public class CreateChatRoomController {
 
     @PostMapping

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/attendance")
-@Tag(name = "출석 생성 컨트롤러")
+@Tag(name = "[Attendance API]")
 public class CreateAttendanceController {
 
     private final CreateAttendanceService createAttendanceService;

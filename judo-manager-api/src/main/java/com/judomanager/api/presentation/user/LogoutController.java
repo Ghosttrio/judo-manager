@@ -6,6 +6,7 @@ import com.judomanager.api.security.jwt.JwtResolver;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.infrastructure.redis.RedisService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
+@Tag(name = "[User API]")
 public class LogoutController {
 
     private final JwtGenerator jwtGenerator;

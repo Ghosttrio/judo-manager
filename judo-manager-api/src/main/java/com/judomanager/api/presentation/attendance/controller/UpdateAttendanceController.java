@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/attendance")
-@Tag(name = "출석 수정 컨트롤러")
+@Tag(name = "[Attendance API]")
 public class UpdateAttendanceController {
 
     private final CreateAttendanceService createAttendanceService;

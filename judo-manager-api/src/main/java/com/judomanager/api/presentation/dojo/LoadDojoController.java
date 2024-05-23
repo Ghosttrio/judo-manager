@@ -18,12 +18,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/dojos")
-@Tag(name = "도장 조회 컨트롤러")
+@Tag(name = "[Dojo API]")
 public class LoadDojoController {
 
     private final LoadDojoService loadDojoService;
 
-    @Tag(name = "도장 생성 API")
     @Operation(summary = "각 도장에 등록되어 있는 회원을 모두 조회한다.")
     @GetMapping("/{dojoId}")
     public JMResponse<List<User>> loadDojoUser(@PathVariable Long dojoId){

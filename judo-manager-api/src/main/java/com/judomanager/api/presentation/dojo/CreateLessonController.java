@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/dojos/lessons")
-@Tag(name = "도장 시간표 생성 컨트롤러")
+@Tag(name = "[Dojo API]")
 public class CreateLessonController {
 
     private final CreateLessonService createLessonService;

@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Tag(name = "인증 컨트롤러")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
 @Slf4j
+@Tag(name = "[User API]")
 public class LoginController {
 
     private final LoginService loginService;
@@ -51,7 +51,6 @@ public class LoginController {
      */
 
 
-    @Tag(name = "로그인 API")
     @Operation(summary = "카카오 코드를 받아서 액세스 토큰을 발급한다.")
     @PostMapping("/login")
     public JMResponse<SigninResponse> login(@RequestBody LoginRequest request){
@@ -62,7 +61,6 @@ public class LoginController {
         return JMResponse.ok(result);
     }
 
-    @Tag(name = "토큰 재발급 API")
     @Operation(summary = "카카오 메일 정보와 만료된 액세스 토큰으로 다시 액세스 토큰을 발급한다.")
     @PostMapping("/refresh")
     public JMResponse<AccessTokenResponse> refresh(@RequestBody RefreshRequest request,

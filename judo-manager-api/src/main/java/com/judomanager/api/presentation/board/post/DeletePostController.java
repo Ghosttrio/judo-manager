@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/boards")
-@Tag(name = "게시판 글 삭제 컨트롤러")
+@Tag(name = "[Board API]")
 public class DeletePostController {
 
     private final DeletePostService deletePostService;
 
-    @Tag(name = "게시글 삭제 API")
     @Operation(summary = "게시판 특정 카테고리에 글을 삭제한다.")
     @DeleteMapping("/posts/{postId}")
     public JMResponse<Void> createPost(@PathVariable Long postId){

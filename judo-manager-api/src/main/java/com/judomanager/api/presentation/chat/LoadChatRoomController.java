@@ -4,6 +4,7 @@ import com.judomanager.api.security.UserId;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.chat.domain.ChatRoom;
 import com.judomanager.domain.chat.service.LoadChatRoomService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/chat/room")
+@Tag(name = "[Chat API]")
 public class LoadChatRoomController {
 
     private final LoadChatRoomService loadChatRoomService;

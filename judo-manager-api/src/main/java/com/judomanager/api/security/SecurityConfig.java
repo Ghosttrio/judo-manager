@@ -1,9 +1,6 @@
 package com.judomanager.api.security;
 
-import com.judomanager.api.security.jwt.JwtAuthenticationEntryPoint;
-import com.judomanager.api.security.jwt.JwtFilter;
-import com.judomanager.api.security.jwt.JwtGenerator;
-import com.judomanager.api.security.jwt.JwtResolver;
+import com.judomanager.api.security.jwt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import java.util.List;
+
 @EnableWebSecurity
 @RequiredArgsConstructor
 @Configuration
@@ -25,9 +24,9 @@ public class SecurityConfig {
     private final JwtResolver jwtResolver;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final CorsConfigurationSource corsConfigurationSource;
-    private final String[] allowUrls = {
+    private final List<String> allowUrls = List.of(
             "/mock/**", "/api/v1/auth/login"
-    };
+    );
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -42,9 +41,8 @@ public class SecurityConfig {
                         authenticationManager.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.requestMatchers(allowUrls).permitAll().anyRequest().authenticated())
-                .addFilterBefore(new JwtFilter(jwtGenerator, jwtResolver), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtFilter(jwtGenerator, jwtResolver, allowUrls), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtExceptionFilter(), JwtFilter.class)
                 .build();
     }
 

@@ -1,14 +1,12 @@
 package com.judomanager.infrastructure.feign.kakao.dto;
 
-import lombok.Data;
 
-@Data
-public class KakaoTokenResponse {
-
-    private String access_token;
-    private String refresh_token;
-    private String token_type;
-    private int expires_in;
-    private String scope;
-    private int refresh_token_expires_in;
+public record KakaoTokenResponse(
+        String access_token,
+        String refresh_token,
+        String token_type,
+        int expires_in,
+        String scope,
+        int refresh_token_expires_in
+) {
 }

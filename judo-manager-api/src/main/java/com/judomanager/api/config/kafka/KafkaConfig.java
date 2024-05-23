@@ -1,6 +1,6 @@
 package com.judomanager.api.config.kafka;
 
-import com.judomanager.api.presentation.chat.dto.ChatDto;
+import com.judomanager.common.util.ChatDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

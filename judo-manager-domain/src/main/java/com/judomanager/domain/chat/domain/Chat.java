@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Entity
+@Entity(name = "tb_chat")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,5 +21,11 @@ public class Chat extends BaseEntity {
 
     private Long userId;
     private Long chatRoomId;
+
+    private String content;
+
+    public static Chat create(Long userId, Long chatRoomId, String content){
+        return new Chat(null, userId, chatRoomId, content);
+    }
 
 }

@@ -26,7 +26,6 @@ public class RedisService {
 
     @Transactional
     public void setValuesWithTimeout(String key, String value, long timeout) {
-        System.out.println(key);
         redisTemplate.opsForValue().set(key, value, timeout, TimeUnit.MILLISECONDS);
     }
 }

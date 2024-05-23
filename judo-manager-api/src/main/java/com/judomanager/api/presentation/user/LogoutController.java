@@ -1,12 +1,31 @@
 package com.judomanager.api.presentation.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.judomanager.api.security.CustomUserDetails;
+import com.judomanager.api.security.jwt.JwtGenerator;
+import com.judomanager.api.security.jwt.JwtResolver;
+import com.judomanager.common.exception.JMResponse;
+import com.judomanager.infrastructure.redis.RedisService;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/auth")
 public class LogoutController {
-    @GetMapping("/logout")
-    public String test(){
-        return "test";
+
+    private final JwtGenerator jwtGenerator;
+    private final JwtResolver jwtResolver;
+    private final RedisService redisService;
+
+    @Operation(summary = "헤더 값의 accessToken 정보를 이용하여 로그아웃합니다.")
+    @PostMapping("/logout")
+    public JMResponse<Void> logout(@RequestHeader("Authorization") String requestAccessToken){
+        Authentication authentication = jwtGenerator.getAuthentication(jwtResolver.resolveToken(requestAccessToken));
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        redisService.deleteValues(principal.email());
+        return JMResponse.ok();
     }
+
 }

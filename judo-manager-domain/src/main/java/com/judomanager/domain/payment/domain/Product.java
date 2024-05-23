@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Entity
+@Entity(name = "tb_product")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
@@ -21,10 +21,9 @@ public class Product {
     
     private String name; // 상품명
     private String amount; // 가격
-    private String month; // 개월 수
 
-    public static Product create(Long dojoId, String name, String amount, String month){
-        return new Product(null, dojoId, name, amount, month);
+    public static Product create(Long dojoId, String name, String amount){
+        return new Product(null, dojoId, name, amount);
     }
 
 }

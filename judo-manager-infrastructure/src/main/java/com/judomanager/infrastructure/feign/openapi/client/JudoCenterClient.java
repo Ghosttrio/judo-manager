@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
-        name = "OpenApiClient",
+        name = "JudoCenterClient",
         url = "https://apis.data.go.kr/B551014/SRVC_API_SFMS_FACI",
         configuration = FeignConfig.class
 )

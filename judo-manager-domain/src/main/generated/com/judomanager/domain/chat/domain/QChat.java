@@ -23,6 +23,8 @@ public class QChat extends EntityPathBase<Chat> {
 
     public final NumberPath<Long> chatRoomId = createNumber("chatRoomId", Long.class);
 
+    public final StringPath content = createString("content");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 

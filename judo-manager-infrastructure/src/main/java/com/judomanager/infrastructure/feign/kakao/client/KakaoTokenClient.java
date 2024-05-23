@@ -6,6 +6,7 @@ import com.judomanager.infrastructure.feign.kakao.dto.KakaoTokenResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
         name = "KakaoTokenClient",
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 )
 public interface KakaoTokenClient {
 
-    @PostMapping(consumes = "application/json")
-    KakaoTokenResponse authorize(@RequestBody KakaoTokenRequest request);
+    @PostMapping
+    KakaoTokenResponse authorize(@RequestParam String client_id,
+                                 @RequestParam String client_secret,
+                                 @RequestParam String grant_type,
+                                 @RequestParam String redirect_uri,
+                                 @RequestParam String code);
 
 
 }

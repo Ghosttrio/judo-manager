@@ -17,7 +17,6 @@ public class RegisterController {
 
     private final UpdateUserService updateUserService;
 
-
     @PatchMapping("/nickname")
     public JMResponse<Void> setNickname(@UserId Long userId,
                                         @RequestBody RegisterRequest.Nickname request){

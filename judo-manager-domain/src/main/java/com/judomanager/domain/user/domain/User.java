@@ -29,12 +29,26 @@ public class User extends BaseEntity {
 
     private String email; // 카카오 로그인 메일
 
-    private String deleted;
-
     private LocalDateTime lastLoginDate;
 
+    private UserState state;
+
+    public void withDrawUser() {
+        this.state = UserState.DELETED;
+        this.nickname = "탈퇴유저";
+        this.email = null;
+        this.dojoId = null;
+    }
+
     public static User init(String email) {
-        return new User(null, "이름", UserRole.MEMBER, null, email,null, LocalDateTime.now());
+        return new User(
+                null,
+                "이름",
+                UserRole.MEMBER,
+                null,
+                email,
+                LocalDateTime.now(),
+                UserState.ACTIVATE);
     }
 
     public void setNickname(String nickname){

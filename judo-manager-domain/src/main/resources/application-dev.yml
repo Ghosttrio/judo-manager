@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/judo-manager-dev
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    defer-datasource-initialization: false # false일 때 sql init 실행 후 ddl auto 실행
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ghosttrio123
+#  sql:
+#    init:
+#      mode: always
+# tosspayment
+toss:
+  key: test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6
+
+
+jwt:
+  secret: ovaod9uvoqejicoajewiodu9weru09qewur023avkdsncasodfjowefjoiqew2314325ihfoisdufadsvdoufwqeurojqw09re920cjfosdfpqeroipsa
+
+
+kakao:
+  client_id: e61b4777d43816865bfbebc87c30aa9b
+  client_secret: x0XT6o350cZAqvzWZmVGlj2I1iIZQBS4
+  redirect_uri: http://localhost:3000/kakao-login
+  grant_type: authorization_code

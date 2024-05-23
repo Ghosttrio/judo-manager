@@ -1,10 +1,10 @@
 package com.judomanager.infrastructure.feign.kakao.dto;
 
-import lombok.Data;
 
-@Data
-public class KakaoUserInfoResponse {
-    private Long id;
-    private String connected_at;
-    private KakaoAccount kakao_account;
+public record KakaoUserInfoResponse(
+        Long id,
+        String connected_at,
+        KakaoAccount kakao_account
+) {
+
 }

@@ -1,7 +1,7 @@
 package com.judomanager.api.presentation.chat;
 
 
-import com.judomanager.api.presentation.chat.dto.ChatDto;
+import com.judomanager.common.util.ChatDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -19,7 +19,7 @@ public class ChatProducer {
     private final KafkaTemplate<String, ChatDto> kafkaTemplate;
 
     @PostMapping("/send")
-    public void sendChat(@RequestBody ChatDto request){
+    public void produceChat(@RequestBody ChatDto request){
         kafkaTemplate.send("", request);
     }
 

@@ -14,9 +14,9 @@ import java.util.Optional;
 
 import static com.judomanager.common.exception.ErrorCode.USER_NOT_FOUND;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;

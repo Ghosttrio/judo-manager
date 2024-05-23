@@ -14,8 +14,8 @@ public class CreatePaymentService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public void create(Long dojoId, String name, String amount, String month){
-        Product product = Product.create(dojoId, name, amount, month);
+    public void create(Long dojoId, String name, String amount){
+        Product product = Product.create(dojoId, name, amount);
         productRepository.save(product);
     }
 }

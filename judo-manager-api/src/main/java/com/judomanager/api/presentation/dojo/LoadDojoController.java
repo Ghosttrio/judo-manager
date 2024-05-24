@@ -1,6 +1,8 @@
 package com.judomanager.api.presentation.dojo;
 
+import com.judomanager.api.security.UserId;
 import com.judomanager.common.exception.JMResponse;
+import com.judomanager.domain.dojo.domain.Dojo;
 import com.judomanager.domain.dojo.service.LoadDojoService;
 import com.judomanager.domain.user.domain.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +29,13 @@ public class LoadDojoController {
     @GetMapping("/{dojoId}")
     public JMResponse<List<User>> loadDojoUser(@PathVariable Long dojoId){
         List<User> result = loadDojoService.findAllUserByDojoId(dojoId);
+        return JMResponse.ok(result);
+    }
+
+    @Operation(summary = "로그인한 회원이 속한 도장의 정보를 조회한다.")
+    @GetMapping
+    public JMResponse<Dojo> loadDojoByUserId(@UserId Long userId){
+        Dojo result = loadDojoService.findByUserId(userId);
         return JMResponse.ok(result);
     }
 }

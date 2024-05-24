@@ -1,6 +1,6 @@
 package com.judomanager.api.presentation.schedule;
 
-import com.judomanager.api.presentation.schedule.dto.UpdateScheduleRequest;
+import com.judomanager.api.presentation.schedule.request.UpdateScheduleRequest;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.schedule.service.UpdateScheduleService;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
-package com.judomanager.api.presentation.attendance.controller;
+package com.judomanager.api.presentation.attendance;
 
-import com.judomanager.api.presentation.attendance.dto.CreateAttendanceRequest;
+import com.judomanager.api.presentation.attendance.request.CreateAttendanceRequest;
 import com.judomanager.api.security.UserId;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.attendance.service.CreateAttendanceService;

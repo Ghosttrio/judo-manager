@@ -12,4 +12,6 @@ public interface DojoQueryRepository {
     Optional<Dojo> findByDojoCode(String dojoCode);
 
     DojoCoordinateDto findDojoCoordinate(Long dojoId);
+
+    Optional<Dojo> findByUserId(Long userId);
 }

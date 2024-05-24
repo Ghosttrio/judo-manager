@@ -1,6 +1,6 @@
 package com.judomanager.api.presentation.notice;
 
-import com.judomanager.api.presentation.notice.dto.UpdateNoticeRequest;
+import com.judomanager.api.presentation.notice.request.UpdateNoticeRequest;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.notice.service.UpdateNoticeService;
 import io.swagger.v3.oas.annotations.Operation;

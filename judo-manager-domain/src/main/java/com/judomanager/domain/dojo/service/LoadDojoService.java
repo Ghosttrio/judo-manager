@@ -1,5 +1,6 @@
 package com.judomanager.domain.dojo.service;
 
+import com.judomanager.common.exception.ErrorCode;
 import com.judomanager.common.exception.JMException;
 import com.judomanager.domain.dojo.domain.Dojo;
 import com.judomanager.domain.dojo.repository.dojo.DojoRepository;
@@ -42,5 +43,10 @@ public class LoadDojoService {
 
     public DojoCoordinateDto findDojoCoordinate(Long dojoId){
         return dojoRepository.findDojoCoordinate(dojoId);
+    }
+
+    public Dojo findByUserId(Long userId){
+        return dojoRepository.findByUserId(userId)
+                .orElseThrow(() -> new JMException(DOJO_NOT_FOUND));
     }
 }

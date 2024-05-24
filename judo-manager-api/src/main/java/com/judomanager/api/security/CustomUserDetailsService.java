@@ -1,8 +1,8 @@
 package com.judomanager.api.security;
 
-import com.judomanager.common.common.exception.JMException;
-import com.judomanager.domain.domain.user.User;
-import com.judomanager.domain.repository.user.UserRepository;
+import com.judomanager.common.exception.JMException;
+import com.judomanager.domain.user.domain.User;
+import com.judomanager.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.judomanager.common.common.exception.ErrorCode.USER_NOT_FOUND;
+import static com.judomanager.common.exception.ErrorCode.USER_NOT_FOUND;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;

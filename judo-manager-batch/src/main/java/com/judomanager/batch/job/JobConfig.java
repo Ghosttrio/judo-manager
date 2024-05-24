@@ -19,12 +19,17 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 public class JobConfig {
 
+    /**
+     * 배치 job 리스트
+     * 1. 슬랙으로 유저 활동 정보 NOTIFICATION
+     * 2. 쌓인 출석 정보를 주기적으로 저장 테이블로 이동
+     */
+
 
     @Bean
     public Job job(JobRepository jobRepository, Step step){
-        return new JobBuilder("myJob", jobRepository)
+        return new JobBuilder("slackJob", jobRepository)
                 .start(step)
-//                .next(step1)
                 .build();
     }
 
@@ -38,7 +43,7 @@ public class JobConfig {
 
     @Bean
     public Step step(JobRepository jobRepository, Tasklet myTasklet, PlatformTransactionManager transactionManager){
-        return new StepBuilder("myStep", jobRepository)
+        return new StepBuilder("slackStep", jobRepository)
                 .tasklet(myTasklet, transactionManager)
                 .build();
     }

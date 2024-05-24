@@ -1,53 +1,53 @@
 package com.judomanager.api.security.jwt;
 
-import com.judomanager.api.controller.user.user.response.TokenResponse;
 import com.judomanager.api.security.CustomUserDetailsService;
-import com.judomanager.common.common.exception.ErrorCode;
-import com.judomanager.common.common.exception.JMException;
-import com.judomanager.domain.service.redis.RedisService;
+import com.judomanager.api.security.jwt.response.TokenResponse;
+import com.judomanager.common.exception.ErrorCode;
+import com.judomanager.common.exception.JMException;
+import com.judomanager.infrastructure.redis.RedisService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.security.SignatureException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.stream.Collectors;
 
-import static com.judomanager.common.common.exception.ErrorCode.EXPIRED_REFRESH_TOKEN;
+import static com.judomanager.common.util.JudoMangerStatic.ACCESS_TOKEN_VALID_TIME;
+import static com.judomanager.common.util.JudoMangerStatic.REFRESH_TOKEN_VALID_TIME;
+
 
 @Component
 @Slf4j
 public class JwtGenerator {
 
     private final Key signingKey;
-    private static final long ACCESS_TOKEN_VALID_TIME = 30 * 60 * 1000L; // 30분
-    private static final long REFRESH_TOKEN_VALID_TIME = 7 * 24 * 60 * 60 * 1000L; // 7일
     private final RedisService redisService;
     private final CustomUserDetailsService customUserDetailsService;
 
     public JwtGenerator(@Value("${jwt.secret}") String secretKey,
-                        CustomUserDetailsService userDetailsService,
-                        RedisService redisService, CustomUserDetailsService customUserDetailsService) {
+                        RedisService redisService,
+                        CustomUserDetailsService customUserDetailsService) {
         this.redisService = redisService;
         this.customUserDetailsService = customUserDetailsService;
+        this.signingKey = generateSigningKey(secretKey);
+    }
+
+    private Key generateSigningKey(String secretKey){
         byte[] secretKeyBytes = Decoders.BASE64.decode(secretKey);
-        this.signingKey = Keys.hmacShaKeyFor(secretKeyBytes);
+        return Keys.hmacShaKeyFor(secretKeyBytes);
     }
 
 
-    public TokenResponse createToken(Long id, String email, String role){
-
-
+    public TokenResponse createToken(Long id, String email){
         if(redisService.getValues(email).isPresent()){
             redisService.deleteValues(email);
         }
@@ -58,7 +58,6 @@ public class JwtGenerator {
         String accessToken = Jwts.builder()
                 .setSubject("access-token")
                 .setExpiration(accessTokenExpiration)
-                .claim("auth", role)
                 .claim("id", id)
                 .claim("email", email)
                 .signWith(signingKey, SignatureAlgorithm.HS512)
@@ -76,24 +75,10 @@ public class JwtGenerator {
                 .build();
     }
 
-//    public Authentication getAuthentication(String accessToken){
-//        String id = getClaims(accessToken).get("id").toString();
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(id);
-//        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
-//    }
 
     public Authentication getAuthentication(String accessToken) {
         Claims claims = getClaims(accessToken);
         UserDetails user = customUserDetailsService.loadUserByUsername(claims.get("id").toString());
-
-//        Collection<? extends GrantedAuthority> authorities =
-//                Arrays.stream(claims.get("auth").toString().split(","))
-//                        .map(SimpleGrantedAuthority::new)
-//                        .collect(Collectors.toList());
-
-//        CustomUserDetails user =
-//                new CustomUserDetails(Long.valueOf(claims.get("id").toString()), claims.get("email").toString(), authorities);
-
         return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }
 
@@ -110,12 +95,6 @@ public class JwtGenerator {
         }
     }
 
-    public String getRole(Authentication authentication){
-        authentication.getAuthorities().stream().forEach(System.out::println);
-        return authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-    }
     public long getTokenExpirationTime(String token) {
         return getClaims(token).getExpiration().getTime();
     }
@@ -133,9 +112,9 @@ public class JwtGenerator {
         } catch (ExpiredJwtException e) {
             log.error("Expired JWT Token");
             throw new JMException(ErrorCode.EXPIRED_TOKEN);
-//        } catch (SignatureException e) {
-//            log.error("Invalid JWT signature.");
-//            throw new JMException(ErrorCode.INVALID_SIGNATURE);
+        } catch (SignatureException e) {
+            log.error("Invalid JWT signature.");
+            throw new JMException(ErrorCode.INVALID_SIGNATURE);
         } catch (MalformedJwtException e) {
             log.error("Invalid JWT token.");
             throw new JMException(ErrorCode.INVALID_TOKEN);
@@ -151,11 +130,34 @@ public class JwtGenerator {
         }
     }
 
-    public void validRefreshToken(String email){
-        String refreshToken = redisService.getValues(email)
-                .orElseThrow(() -> new JMException(EXPIRED_REFRESH_TOKEN));
-        validateToken(refreshToken);
-        redisService.deleteValues(email);
+    public boolean validateRefreshToken(String email) {
+        try {
+            String refreshToken = redisService.getValues(email)
+                    .orElseThrow(() -> new JMException(ErrorCode.EXPIRED_REFRESH_TOKEN));
+            Jwts.parserBuilder()
+                    .setSigningKey(signingKey)
+                    .build()
+                    .parseClaimsJws(refreshToken);
+            return true;
+        } catch (ExpiredJwtException e) {
+            log.error("Expired JWT Token");
+            throw new JMException(ErrorCode.EXPIRED_REFRESH_TOKEN);
+        } catch (SignatureException e) {
+            log.error("Invalid JWT signature.");
+            throw new JMException(ErrorCode.INVALID_SIGNATURE);
+        } catch (MalformedJwtException e) {
+            log.error("Invalid JWT token.");
+            throw new JMException(ErrorCode.INVALID_TOKEN);
+        } catch (UnsupportedJwtException e) {
+            log.error("Unsupported JWT token.");
+            throw new JMException(ErrorCode.UNSUPPORTED_TOKEN);
+        } catch (IllegalArgumentException e) {
+            log.error("JWT claims string is empty.");
+            throw new JMException(ErrorCode.EMPTY_TOKEN);
+        } catch (NullPointerException e){
+            log.error("JWT Token is empty.");
+            throw new JMException(ErrorCode.EMPTY_TOKEN);
+        }
     }
 
 }

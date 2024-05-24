@@ -23,6 +23,10 @@ public class LoadScheduleService {
         return scheduleRepository.findScheduleByDojoId(dojoId);
     }
 
+    public List<Schedule> findAllByDojoIdWeek(Long dojoId){
+        return scheduleRepository.findScheduleByDojoIdWeek(dojoId);
+    }
+
     public Schedule findSchedule(Long scheduleId){
         return scheduleRepository.findSchedule(scheduleId)
                 .orElseThrow(() -> new JMException(ErrorCode.SCHEDULE_NOT_FOUND));

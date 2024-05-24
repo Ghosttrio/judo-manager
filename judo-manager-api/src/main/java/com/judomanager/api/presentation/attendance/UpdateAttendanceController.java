@@ -1,4 +1,4 @@
-package com.judomanager.api.presentation.attendance.controller;
+package com.judomanager.api.presentation.attendance;
 
 import com.judomanager.domain.attendance.service.CreateAttendanceService;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -57,7 +57,7 @@ public class LoginController {
         User user = loginService.login(request.kakaoCode());
         TokenResponse token = jwtGenerator.createToken(user.getId(), user.getEmail());
         updateUserService.lastLogin(user.getId());
-        SigninResponse result = new SigninResponse(user.getId(), token.getAccessToken(), token.getRefreshToken());
+        SigninResponse result = new SigninResponse(user.getId(), token.accessToken(), token.refreshToken());
         return JMResponse.ok(result);
     }
 
@@ -86,11 +86,11 @@ public class LoginController {
             // 레디스에 새로 발급한 리프레스 토큰 저장
             redisService.setValuesWithTimeout(
                     request.email(),
-                    token.getRefreshToken(),
-                    jwtGenerator.getTokenExpirationTime(token.getRefreshToken()));
+                    token.refreshToken(),
+                    jwtGenerator.getTokenExpirationTime(token.refreshToken()));
 
             // 액세스 토큰 리턴
-            return JMResponse.ok(new AccessTokenResponse(token.getAccessToken()));
+            return JMResponse.ok(new AccessTokenResponse(token.accessToken()));
         }else {
             throw new JMException(ErrorCode.EXPIRED_REFRESH_TOKEN);
         }

@@ -25,9 +25,9 @@ public class NoticeQueryRepositoryImpl implements NoticeQueryRepository{
     }
 
     public Optional<Notice> checkTitleDuplicate(Long dojoId, String title){
-        Notice notice = query.selectFrom(QNotice.notice)
-                .where(QNotice.notice.dojoId.eq(dojoId).and(QNotice.notice.title.eq(title)))
+        Notice result = query.selectFrom(notice)
+                .where(notice.dojoId.eq(dojoId).and(notice.title.eq(title)))
                 .fetchOne();
-        return Optional.ofNullable(notice);
+        return Optional.ofNullable(result);
     }
 }

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Entity(name = "tb_schedule")
 @AllArgsConstructor
@@ -21,10 +23,20 @@ public class Schedule extends BaseEntity {
 
     private String title;
     private String content;
+    private LocalDateTime time;
 
 
-    public static Schedule create(Long dojoId, String title, String content){
-        return new Schedule(null, dojoId, title, content);
+    public static Schedule create(Long dojoId,
+                                  String title,
+                                  String content,
+                                  LocalDateTime time){
+        return new Schedule(
+                null,
+                dojoId,
+                title,
+                content,
+                time
+        );
     }
 
     public void update(String title, String content){

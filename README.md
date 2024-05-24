@@ -1,12 +1,10 @@
-# JUDO MANAGER
-
----
 ![main](./docs/img/main.png)
+# JUDO MANAGER
 
 ---
 
 #### 사용 기술
-Java, Spring, JPA, MySQL
+Java, SpringBoot, JPA, MySQL, Docker, AWS
 
 ---
 #### ERD
@@ -15,5 +13,5 @@ Java, Spring, JPA, MySQL
 ---
 
 ### 기능구조도
-
+![diagram](./docs/img/diagram.png)
 ---

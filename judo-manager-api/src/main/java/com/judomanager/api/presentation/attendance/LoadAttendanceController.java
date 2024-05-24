@@ -1,4 +1,4 @@
-package com.judomanager.api.presentation.attendance.controller;
+package com.judomanager.api.presentation.attendance;
 
 import com.judomanager.api.security.UserId;
 import com.judomanager.common.exception.JMResponse;

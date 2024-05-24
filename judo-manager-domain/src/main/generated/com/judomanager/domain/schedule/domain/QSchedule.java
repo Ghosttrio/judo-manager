@@ -30,6 +30,8 @@ public class QSchedule extends EntityPathBase<Schedule> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final DateTimePath<java.time.LocalDateTime> time = createDateTime("time", java.time.LocalDateTime.class);
+
     public final StringPath title = createString("title");
 
     //inherited

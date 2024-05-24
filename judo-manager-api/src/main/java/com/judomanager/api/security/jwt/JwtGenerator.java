@@ -25,8 +25,8 @@ import static com.judomanager.common.util.JudoMangerStatic.ACCESS_TOKEN_VALID_TI
 import static com.judomanager.common.util.JudoMangerStatic.REFRESH_TOKEN_VALID_TIME;
 
 
-@Component
 @Slf4j
+@Component
 public class JwtGenerator {
 
     private final Key signingKey;
@@ -69,10 +69,7 @@ public class JwtGenerator {
                 .compact();
         redisService.setValuesWithTimeout(email, refreshToken, getTokenExpirationTime(refreshToken));
 
-        return TokenResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build();
+        return new TokenResponse(accessToken, refreshToken);
     }
 
 

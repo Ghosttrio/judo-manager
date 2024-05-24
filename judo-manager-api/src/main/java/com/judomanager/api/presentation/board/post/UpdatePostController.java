@@ -1,6 +1,6 @@
 package com.judomanager.api.presentation.board.post;
 
-import com.judomanager.api.presentation.board.post.dto.UpdatePostRequest;
+import com.judomanager.api.presentation.board.post.request.UpdatePostRequest;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.board.service.UpdatePostService;
 import io.swagger.v3.oas.annotations.Operation;

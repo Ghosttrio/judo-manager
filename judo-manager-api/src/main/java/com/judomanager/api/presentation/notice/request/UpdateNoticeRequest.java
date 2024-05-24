@@ -1,4 +1,4 @@
-package com.judomanager.api.presentation.notice.dto;
+package com.judomanager.api.presentation.notice.request;
 
 public record UpdateNoticeRequest(
         String title,

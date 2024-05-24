@@ -1,4 +1,4 @@
-package com.judomanager.api.presentation.attendance.dto;
+package com.judomanager.api.presentation.attendance.request;
 
 public record CreateAttendanceRequest(
         Long dojoId,

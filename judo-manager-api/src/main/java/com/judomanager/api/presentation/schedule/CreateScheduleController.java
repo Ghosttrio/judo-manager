@@ -1,6 +1,6 @@
 package com.judomanager.api.presentation.schedule;
 
-import com.judomanager.api.presentation.schedule.dto.CreateScheduleRequest;
+import com.judomanager.api.presentation.schedule.request.CreateScheduleRequest;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.schedule.service.CreateScheduleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,11 @@ public class CreateScheduleController {
 
     @PostMapping
     public JMResponse<Void> createSchedule(@RequestBody CreateScheduleRequest request){
-        createScheduleService.create(request.dojoId(), request.title(), request.content());
+        createScheduleService.create(
+                request.dojoId(),
+                request.title(),
+                request.content(),
+                request.startTime());
         return JMResponse.ok();
     }
 }

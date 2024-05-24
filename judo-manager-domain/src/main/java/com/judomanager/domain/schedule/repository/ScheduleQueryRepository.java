@@ -12,5 +12,7 @@ public interface ScheduleQueryRepository {
 
     List<Schedule> findScheduleByDojoId(Long dojoId);
 
+    List<Schedule> findScheduleByDojoIdWeek(Long dojoId);
+
     Optional<Schedule> findSchedule(Long scheduleId);
 }

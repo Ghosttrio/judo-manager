@@ -21,7 +21,7 @@ public class CreateNoticeController {
     @Operation(summary = "각 도장에 등록되어 있는 공지사항을 모두 조회한다.")
     @PostMapping("/{dojoId}")
     public JMResponse<Void> createNotice(@PathVariable Long dojoId,
-                                   @RequestBody CreateNoticeRequest request){
+                                         @RequestBody CreateNoticeRequest request){
         noticeService.saveNotice(dojoId, request.title(), request.content());
         return JMResponse.ok();
     }

@@ -50,7 +50,7 @@ public class JwtFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } else if(isAllowed(request.getRequestURI())){
-            log.info("로그인 전 API");
+//            log.info("로그인 전 API");
             filterChain.doFilter(request, response);
         } else {
             log.info("허용되지 않은 API");

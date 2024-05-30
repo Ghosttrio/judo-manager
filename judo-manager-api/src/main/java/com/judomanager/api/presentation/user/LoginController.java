@@ -2,27 +2,16 @@ package com.judomanager.api.presentation.user;
 
 import com.judomanager.api.presentation.user.request.LoginRequest;
 import com.judomanager.api.presentation.user.request.RefreshRequest;
-import com.judomanager.api.security.jwt.JwtGenerator;
-import com.judomanager.api.security.jwt.JwtResolver;
-import com.judomanager.api.security.jwt.response.AccessTokenResponse;
-import com.judomanager.api.security.jwt.response.SigninResponse;
-import com.judomanager.api.security.jwt.response.TokenResponse;
-import com.judomanager.common.exception.ErrorCode;
-import com.judomanager.common.exception.JMException;
+import com.judomanager.domain.security.jwt.response.AccessTokenResponse;
+import com.judomanager.domain.security.jwt.response.SigninResponse;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.common.util.JudoMangerStatic;
-import com.judomanager.domain.user.domain.User;
 import com.judomanager.domain.user.service.LoginService;
-import com.judomanager.domain.user.service.UpdateUserService;
-import com.judomanager.infrastructure.redis.RedisService;
-import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,10 +21,6 @@ import java.util.Optional;
 public class LoginController {
 
     private final LoginService loginService;
-    private final JwtGenerator jwtGenerator;
-    private final JwtResolver jwtResolver;
-    private final UpdateUserService updateUserService;
-    private final RedisService redisService;
 
     /**
      * 로그인 로직
@@ -54,10 +39,7 @@ public class LoginController {
     @Operation(summary = "카카오 코드를 받아서 액세스 토큰을 발급한다.")
     @PostMapping("/login")
     public JMResponse<SigninResponse> login(@RequestBody LoginRequest request){
-        User user = loginService.login(request.kakaoCode());
-        TokenResponse token = jwtGenerator.createToken(user.getId(), user.getEmail());
-        updateUserService.lastLogin(user.getId());
-        SigninResponse result = new SigninResponse(user.getId(), token.accessToken(), token.refreshToken());
+        SigninResponse result = loginService.login(request.kakaoCode());
         return JMResponse.ok(result);
     }
 
@@ -65,34 +47,7 @@ public class LoginController {
     @PostMapping("/refresh")
     public JMResponse<AccessTokenResponse> refresh(@RequestBody RefreshRequest request,
                                                    @RequestHeader(JudoMangerStatic.AUTHORIZATION_HEADER) String requestAccessToken){
-        // refresh 토큰 accessToken으로 redis에서 가져오기
-        Optional<String> refreshToken = redisService.getValues(request.email());
-
-        // refresh 토큰 validate 리프레시 토큰까지 만료되면 페이지 이동 요청
-        if(refreshToken.isPresent() && jwtGenerator.validateRefreshToken(request.email())){
-
-            // 액세스 토큰 추출
-            String accessToken = jwtResolver.resolveToken(requestAccessToken);
-
-            redisService.deleteValues(request.email());
-            Claims claims = jwtGenerator.getClaims(accessToken);
-            Long userId = Long.parseLong(claims.get("id").toString());
-
-            // 액세스, 리프레시 토큰 생성
-            TokenResponse token = jwtGenerator.createToken(
-                    userId,
-                    request.email());
-
-            // 레디스에 새로 발급한 리프레스 토큰 저장
-            redisService.setValuesWithTimeout(
-                    request.email(),
-                    token.refreshToken(),
-                    jwtGenerator.getTokenExpirationTime(token.refreshToken()));
-
-            // 액세스 토큰 리턴
-            return JMResponse.ok(new AccessTokenResponse(token.accessToken()));
-        }else {
-            throw new JMException(ErrorCode.EXPIRED_REFRESH_TOKEN);
-        }
+        AccessTokenResponse result = loginService.refresh(request.email(), requestAccessToken);
+        return JMResponse.ok(result);
     }
 }

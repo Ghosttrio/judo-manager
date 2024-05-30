@@ -1,4 +1,4 @@
-package com.judomanager.api.security.jwt.response;
+package com.judomanager.domain.security.jwt.response;
 
 public record SigninResponse(
         Long userId,

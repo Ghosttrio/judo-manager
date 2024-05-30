@@ -4,6 +4,7 @@ import com.judomanager.api.security.UserId;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.attendance.domain.Attendance;
 import com.judomanager.domain.attendance.service.LoadAttendanceService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,8 @@ public class LoadAttendanceController {
 
     private final LoadAttendanceService loadAttendanceService;
 
-    // 유저의 출석 여부 확인
-    // todo 이미 출석을 했으면 출석 x -> api 생성
     @GetMapping
+    @Operation(summary = "유저의 출석 정보를 불러옵니다.")
     public JMResponse<Attendance> loadUserAttendance(@UserId Long userId){
         Attendance attendance = loadAttendanceService.loadAttendance(userId);
         return JMResponse.ok(attendance);

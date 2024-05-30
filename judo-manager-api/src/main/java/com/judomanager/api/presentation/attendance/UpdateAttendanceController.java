@@ -12,14 +12,4 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/attendance")
 @Tag(name = "[Attendance API]")
 public class UpdateAttendanceController {
-
-    private final CreateAttendanceService createAttendanceService;
-
-//    @PatchMapping
-//    public JMResponse<Void> updateApproval(@UserId Long userId,
-//                                           @RequestParam Long dojoId){
-//        createAttendanceService.updateApproval(userId, dojoId);
-//        return JMResponse.ok();
-//    }
-
 }

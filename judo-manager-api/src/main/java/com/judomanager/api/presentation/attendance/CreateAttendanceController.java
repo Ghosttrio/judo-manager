@@ -4,6 +4,7 @@ import com.judomanager.api.presentation.attendance.request.CreateAttendanceReque
 import com.judomanager.api.security.UserId;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.attendance.service.CreateAttendanceService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class CreateAttendanceController {
     private final CreateAttendanceService createAttendanceService;
 
     @PostMapping
+    @Operation(summary = "유저가 출석 정보를 생성합니다.")
     public JMResponse<Void> createAttendance(@UserId Long userId,
                                              @RequestBody CreateAttendanceRequest request){
         createAttendanceService.create(userId, request.dojoId(), request.latitude(), request.longitude());

@@ -1,6 +1,7 @@
 package com.judomanager.api.security;
 
 import com.judomanager.api.security.jwt.*;
+import com.judomanager.domain.security.jwt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +21,14 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
-    private final JwtGenerator jwtGenerator;
+    private final JwtValidator jwtValidator;
     private final JwtResolver jwtResolver;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final AuthenticationLoader authenticationLoader;
     private final CorsConfigurationSource corsConfigurationSource;
     private final List<String> allowUrls = List.of(
             "/mock/**", "/api/v1/auth/login", "/test"
     );
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -41,7 +42,7 @@ public class SecurityConfig {
                         authenticationManager.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtFilter(jwtGenerator, jwtResolver, allowUrls), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtFilter(jwtResolver, jwtValidator, authenticationLoader, allowUrls), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtExceptionFilter(), JwtFilter.class)
                 .build();
     }

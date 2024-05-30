@@ -7,11 +7,11 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.CharEncoding;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static org.apache.commons.lang3.CharEncoding.UTF_8;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class JwtExceptionFilter extends OncePerRequestFilter {
@@ -29,7 +29,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
 
     private void CatchJwtException(HttpServletResponse response, JMException exception) throws IOException {
         response.setContentType(APPLICATION_JSON_VALUE);
-        response.setCharacterEncoding(UTF_8);
+        response.setCharacterEncoding(CharEncoding.UTF_8);
         response.setStatus(exception.getHttpStatus());
         ErrorResponse error = ErrorResponse.from(exception.getErrorCode());
         String value = mapper.writeValueAsString(error);

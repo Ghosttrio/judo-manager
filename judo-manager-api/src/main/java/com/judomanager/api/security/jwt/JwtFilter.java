@@ -2,6 +2,8 @@ package com.judomanager.api.security.jwt;
 
 import com.judomanager.common.exception.ErrorCode;
 import com.judomanager.common.exception.JMException;
+import com.judomanager.domain.security.jwt.JwtResolver;
+import com.judomanager.domain.security.jwt.JwtValidator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,8 +25,9 @@ import static com.judomanager.common.util.JudoMangerStatic.AUTHORIZATION_HEADER;
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final JwtGenerator jwtGenerator;
     private final JwtResolver jwtResolver;
+    private final JwtValidator jwtValidator;
+    private final AuthenticationLoader authenticationLoader;
     private final List<String> allowUrls;
 
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
@@ -42,8 +45,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 throw new JMException(ErrorCode.EMPTY_TOKEN);
             }
             String accessToken = jwtResolver.resolveToken(token);
-            if(accessToken != null && jwtGenerator.validateToken(accessToken)){
-                Authentication authentication = jwtGenerator.getAuthentication(accessToken);
+            if(accessToken != null && jwtValidator.validateToken(accessToken)){
+                Authentication authentication = authenticationLoader.getAuthentication(accessToken);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }else {
                 throw new JMException(ErrorCode.UNSUPPORTED_TOKEN);

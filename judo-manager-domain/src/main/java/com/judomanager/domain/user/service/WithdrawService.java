@@ -1,7 +1,7 @@
 package com.judomanager.domain.user.service;
 
 import com.judomanager.domain.user.domain.User;
-import com.judomanager.infrastructure.redis.RedisService;
+import com.judomanager.infrastructure.redis.RedisServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class WithdrawService {
 
     private final LoadUserService loadUserService;
-    private final RedisService redisService;
+    private final RedisServiceImpl redisServiceImpl;
 
     @Transactional
     public void withdraw(Long userId){
         User user = loadUserService.findById(userId);
         String email = user.getEmail();
-        redisService.deleteValues(email);
+        redisServiceImpl.deleteValues(email);
         user.withDrawUser();
     }
 }

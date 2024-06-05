@@ -14,6 +14,7 @@ public class CreateUserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     public User signup(String email){
         return userRepository.findByEmail(email)
                 .orElseGet(() -> createUser(email));

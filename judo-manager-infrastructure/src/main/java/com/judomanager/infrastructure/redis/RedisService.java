@@ -1,31 +1,12 @@
 package com.judomanager.infrastructure.redis;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+public interface RedisService {
 
-@Service
-@Transactional(readOnly = true)
-@RequiredArgsConstructor
-public class RedisService {
+    String getValues(String key);
 
-    private final RedisTemplate<String, String> redisTemplate;
+    void deleteValues(String key);
 
-    public Optional<String> getValues(String key) {
-        return Optional.ofNullable(redisTemplate.opsForValue().get(key));
-    }
+    void setValuesWithTimeout(String key, String value, long timeout);
 
-    @Transactional
-    public void deleteValues(String key) {
-        redisTemplate.delete(key);
-    }
-
-    @Transactional
-    public void setValuesWithTimeout(String key, String value, long timeout) {
-        redisTemplate.opsForValue().set(key, value, timeout, TimeUnit.MILLISECONDS);
-    }
 }

@@ -24,8 +24,7 @@ public class CreatePaymentController {
     // 만약 회원권이 있는데 추가로 결제하면 LessonPass의 시간 업데이트
     @PostMapping
     public JMResponse<Void> createProduct(@RequestBody CreateProductRequest request){
-        createPaymentService.create(request.dojoId(),
-                request.name(), request.amount());
+        createPaymentService.create(request.dojoId(), request.name(), request.amount());
         return JMResponse.ok();
     }
 }

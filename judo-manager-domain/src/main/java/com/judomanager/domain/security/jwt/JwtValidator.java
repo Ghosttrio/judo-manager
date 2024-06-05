@@ -3,6 +3,7 @@ package com.judomanager.domain.security.jwt;
 import com.judomanager.common.exception.ErrorCode;
 import com.judomanager.common.exception.JMException;
 import com.judomanager.infrastructure.redis.RedisService;
+import com.judomanager.infrastructure.redis.RedisServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -26,9 +27,7 @@ public class JwtValidator {
 
     public boolean validateToken(String accessToken) {
         try {
-            if (redisService.getValues(accessToken).isPresent()){
-                return false;
-            }
+            redisService.getValues(accessToken);
             Key key = jwtKeyGenerator.generateSigningKey();
             Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -58,8 +57,7 @@ public class JwtValidator {
 
     public boolean validateRefreshToken(String email) {
         try {
-            String refreshToken = redisService.getValues(email)
-                    .orElseThrow(() -> new JMException(ErrorCode.EXPIRED_REFRESH_TOKEN));
+            String refreshToken = redisService.getValues(email);
             Key key = jwtKeyGenerator.generateSigningKey();
             Jwts.parserBuilder()
                     .setSigningKey(key)

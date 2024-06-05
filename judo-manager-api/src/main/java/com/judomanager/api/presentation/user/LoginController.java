@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import static com.judomanager.common.util.JudoMangerStatic.AUTHORIZATION_HEADER;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
@@ -35,7 +37,6 @@ public class LoginController {
      * 7. 로그아웃 시 리프레시 토큰 삭제
      */
 
-
     @Operation(summary = "카카오 코드를 받아서 액세스 토큰을 발급한다.")
     @PostMapping("/login")
     public JMResponse<SigninResponse> login(@RequestBody LoginRequest request){
@@ -46,7 +47,7 @@ public class LoginController {
     @Operation(summary = "카카오 메일 정보와 만료된 액세스 토큰으로 다시 액세스 토큰을 발급한다.")
     @PostMapping("/refresh")
     public JMResponse<AccessTokenResponse> refresh(@RequestBody RefreshRequest request,
-                                                   @RequestHeader(JudoMangerStatic.AUTHORIZATION_HEADER) String requestAccessToken){
+                                                   @RequestHeader(AUTHORIZATION_HEADER) String requestAccessToken){
         AccessTokenResponse result = loginService.refresh(request.email(), requestAccessToken);
         return JMResponse.ok(result);
     }

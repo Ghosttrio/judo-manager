@@ -1,6 +1,6 @@
 package com.judomanager.domain.security.jwt;
 
-import com.judomanager.infrastructure.redis.RedisService;
+import com.judomanager.infrastructure.redis.RedisServiceImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -16,8 +16,8 @@ public class CreateToken extends CreateTokenTemplate {
 
     private final JwtKeyGenerator jwtKeyGenerator;
 
-    public CreateToken(RedisService redisService, JwtResolver jwtResolver, JwtKeyGenerator jwtKeyGenerator) {
-        super(redisService, jwtResolver);
+    public CreateToken(RedisServiceImpl redisServiceImpl, JwtResolver jwtResolver, JwtKeyGenerator jwtKeyGenerator) {
+        super(redisServiceImpl, jwtResolver);
         this.jwtKeyGenerator = jwtKeyGenerator;
     }
 

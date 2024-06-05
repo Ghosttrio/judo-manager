@@ -4,7 +4,7 @@ import com.judomanager.api.security.CustomUserDetails;
 import com.judomanager.api.security.jwt.AuthenticationLoader;
 import com.judomanager.domain.security.jwt.JwtResolver;
 import com.judomanager.common.exception.JMResponse;
-import com.judomanager.infrastructure.redis.RedisService;
+import com.judomanager.infrastructure.redis.RedisServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +19,14 @@ public class LogoutController {
 
     private final AuthenticationLoader authenticationLoader;
     private final JwtResolver jwtResolver;
-    private final RedisService redisService;
+    private final RedisServiceImpl redisServiceImpl;
 
     @Operation(summary = "헤더 값의 accessToken 정보를 이용하여 로그아웃합니다.")
     @PostMapping("/logout")
     public JMResponse<Void> logout(@RequestHeader("Authorization") String requestAccessToken){
         Authentication authentication = authenticationLoader.getAuthentication(jwtResolver.resolveToken(requestAccessToken));
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
-        redisService.deleteValues(principal.email());
+        redisServiceImpl.deleteValues(principal.email());
         return JMResponse.ok();
     }
 

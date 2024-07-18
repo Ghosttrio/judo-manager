@@ -2,14 +2,25 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.sonarqube' version '5.0.0.4638'
 }
+
+sonarqube {
+	properties {
+		property 'sonar.host.url', 'http://localhost:9000'
+		property 'sonar.login', 'sqp_a7bd953eaf691e3705fb5db27e7f37b2e537ec82'
+		property 'sonar.projectKey', 'test'
+		property 'sonar.projectName', 'test'
+	}
+}
+
+
 group = 'com.judomanager'
 version = '1.0.0'
 
 java {
 	sourceCompatibility = '17'
 }
-
 
 repositories {
 	mavenCentral()
@@ -20,10 +31,10 @@ bootJar {
 }
 
 compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 subprojects {
 	group = 'com.judomanager'
-
 
 	java {
 		sourceCompatibility = '17'
@@ -35,7 +46,6 @@ subprojects {
 	apply plugin: 'io.spring.dependency-management'
 
 	configurations {
-
 		compileOnly {
 			extendsFrom annotationProcessor
 		}

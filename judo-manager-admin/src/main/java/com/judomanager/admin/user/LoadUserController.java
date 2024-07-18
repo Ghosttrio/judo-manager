@@ -17,16 +17,16 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/v1/users")
-@Tag(name = "관리자 회원 조회 컨트롤러")
+@Tag(name = "관리자 회원 API")
 public class LoadUserController {
 
     private final LoadUserService loadUserService;
 
-    @Tag(name = "관리자 회원 전체 조회 API")
     @Operation(summary = "유도 매니저에 등록된 모든 회원을 조회한다.")
     @GetMapping
     public JMResponse<List<User>> loadAllUser(){
         List<User> result = loadUserService.findAll();
         return JMResponse.ok(result);
     }
+
 }

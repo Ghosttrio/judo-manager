@@ -17,12 +17,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/v1/payments")
-@Tag(name = "관리자 결제 내역 조회 컨트롤러")
+@Tag(name = "관리자 결제 API")
 public class LoadPaymentController {
 
     private final LoadPaymentService loadPaymentService;
 
-    @Tag(name = "관리자 결제 내역 전체 조회 API")
     @Operation(summary = "유도 매니저에 등록된 모든 결제 내역을 조회한다.")
     @GetMapping
     public JMResponse<List<Payment>> loadAllPayment(){

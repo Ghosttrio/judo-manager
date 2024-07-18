@@ -1,5 +1,9 @@
 package com.judomanager.common.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JudoMangerStatic {
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final long ACCESS_TOKEN_VALID_TIME = 30 * 60 * 1000L; // 30분

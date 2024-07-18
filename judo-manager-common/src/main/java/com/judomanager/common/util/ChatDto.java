@@ -4,6 +4,4 @@ public record ChatDto(
         Long userId,
         Long chatRoomId,
         String content
-) {
-
-}
+) {}

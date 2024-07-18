@@ -28,24 +28,7 @@ public class LoadPaymentService {
     }
 
     public String loadPaymentWidget(String jsonBody) {
-        String result = null;
-        try {
-
-            JsonObject json = JsonParser.parseString(jsonBody).getAsJsonObject();
-            String orderId = json.get("orderId").getAsString();
-            String amount = json.get("amount").getAsString();
-            String paymentKey = json.get("paymentKey").getAsString();
-
-            TosspaymentConfirmRequest request = new TosspaymentConfirmRequest(orderId, amount, paymentKey);
-
-            String authorizations = authorizationService.getAuthorization();
-            Object sno = tosspaymentConfirmClient.confirmPayment(authorizations, request);
-
-            ObjectMapper mapper = new ObjectMapper();
-            result = mapper.writeValueAsString(sno);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return result;
+        // 페이먼츠 로직 추가
+        return null;
     }
 }

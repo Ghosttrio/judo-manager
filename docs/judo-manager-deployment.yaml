@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: judo-manager
+  labels:
+    app: judo-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: judo-manager
+  template:
+    metadata:
+      name: judo-manager
+      labels:
+        app: judo-manager
+    spec:
+      containers:
+        - name: judo-manager
+          image: ghosttrio/judo-manager
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      

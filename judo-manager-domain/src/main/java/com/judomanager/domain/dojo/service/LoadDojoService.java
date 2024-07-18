@@ -24,7 +24,10 @@ public class LoadDojoService {
     private final LoadUserService loadUserService;
 
     public void checkDojoExist(Long dojoId){
-        dojoRepository.findById(dojoId).orElseThrow(() -> new JMException(DOJO_NOT_FOUND));
+        dojoRepository.findById(dojoId).ifPresentOrElse(
+                dojo -> {}, // 값이 있을 경우 아무 작업도 수행하지 않음
+                () -> { throw new JMException(DOJO_NOT_FOUND); } // 값이 없을 경우 예외 발생
+        );
     }
 
     public List<Dojo> findAll(){
@@ -39,7 +42,6 @@ public class LoadDojoService {
         return dojoRepository.findByDojoCode(dojoCode)
                 .orElseThrow(() -> new JMException(DOJO_NOT_FOUND));
     }
-
 
     public DojoCoordinateDto findDojoCoordinate(Long dojoId){
         return dojoRepository.findDojoCoordinate(dojoId);

@@ -1,13 +1,14 @@
 package com.judomanager.domain.security.jwt;
 
 import com.judomanager.domain.security.jwt.response.TokenResponse;
+import com.judomanager.infrastructure.redis.RedisService;
 import com.judomanager.infrastructure.redis.RedisServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public abstract class CreateTokenTemplate implements JwtGenerator {
 
-    protected final RedisServiceImpl redisServiceImpl;
+    protected final RedisService redisService;
     protected final JwtResolver jwtResolver;
 
     protected abstract String createAccessToken(Long id, String email);
@@ -23,14 +24,12 @@ public abstract class CreateTokenTemplate implements JwtGenerator {
     }
 
     protected void deleteExistTokenValues(String email) {
-        if (redisServiceImpl.getValues(email).isPresent()) {
-            redisServiceImpl.deleteValues(email);
-        }
+        redisService.deleteValues(email);
     }
 
     protected void createTokenValuesWithTimeout(String email, String refreshToken) {
         long tokenExpirationTime = jwtResolver.getTokenExpirationTime(refreshToken);
-        redisServiceImpl.setValuesWithTimeout(email, refreshToken, tokenExpirationTime);
+        redisService.setValuesWithTimeout(email, refreshToken, tokenExpirationTime);
     }
 
 }

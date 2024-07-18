@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/v1/dojos")
-@Tag(name = "관리자 도장 수정 컨트롤러")
+@Tag(name = "관리자 도장 API")
 public class UpdateDojoController {
 
     private final UpdateDojoService updateDojoService;
     
-    @Tag(name = "관리자 도장 승인/거절 API")
     @Operation(summary = "요청한 도장을 승인/거절 한다.")
     @PatchMapping("/{dojoId}/state")
     public JMResponse<Void> updateDojoState(@PathVariable Long dojoId,
@@ -27,4 +26,5 @@ public class UpdateDojoController {
         updateDojoService.updateState(dojoId, request.state());
         return JMResponse.ok();
     }
+
 }

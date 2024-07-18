@@ -23,9 +23,9 @@ public class StompHandler implements ChannelInterceptor {
         StompCommand command = accessor.getCommand();
 
         switch (Objects.requireNonNull(command)) {
-            case CONNECT -> log.info("세션 들어옴 => {}", sessionId);
-            case DISCONNECT -> log.info("세션 끊음 => {}", sessionId);
-            default -> {}
+            case CONNECT -> log.info("[세션 연결] ID : {}", sessionId);
+            case DISCONNECT -> log.info("[세션 종료] ID : {}", sessionId);
+            default -> {log.info("Default Session");}
         }
 
     }

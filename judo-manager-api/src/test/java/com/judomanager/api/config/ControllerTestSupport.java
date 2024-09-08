@@ -7,12 +7,14 @@ import com.judomanager.api.presentation.notice.CreateNoticeController;
 import com.judomanager.api.presentation.notice.DeleteNoticeController;
 import com.judomanager.api.presentation.notice.LoadNoticeController;
 import com.judomanager.api.presentation.notice.UpdateNoticeController;
+import com.judomanager.api.presentation.user.LoginController;
 import com.judomanager.domain.attendance.service.CreateAttendanceService;
 import com.judomanager.domain.attendance.service.LoadAttendanceService;
 import com.judomanager.domain.notice.service.CreateNoticeService;
 import com.judomanager.domain.notice.service.DeleteNoticeService;
 import com.judomanager.domain.notice.service.LoadNoticeService;
 import com.judomanager.domain.notice.service.UpdateNoticeService;
+import com.judomanager.domain.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,12 +30,10 @@ import org.springframework.web.context.WebApplicationContext;
         DeleteNoticeController.class,
         LoadNoticeController.class,
         UpdateNoticeController.class,
-
         CreateAttendanceController.class,
-        LoadAttendanceController.class
+        LoadAttendanceController.class,
+        LoginController.class
 })
-//@MockBean(JpaMetamodelMappingContext.class)
-//@Import(SecurityTestConfig.class)
 @ActiveProfiles("test")
 public class ControllerTestSupport extends MonkeySupport {
     @Autowired
@@ -42,7 +42,6 @@ public class ControllerTestSupport extends MonkeySupport {
     protected ObjectMapper objectMapper;
     @Autowired
     protected MockMvc mockMvc;
-
     @MockBean
     protected CreateNoticeService createNoticeService;
     @MockBean
@@ -51,9 +50,10 @@ public class ControllerTestSupport extends MonkeySupport {
     protected LoadNoticeService loadNoticeService;
     @MockBean
     protected UpdateNoticeService updateNoticeService;
-
     @MockBean
     protected CreateAttendanceService createAttendanceService;
     @MockBean
     protected LoadAttendanceService loadAttendanceService;
+    @MockBean
+    protected LoginService loginService;
 }

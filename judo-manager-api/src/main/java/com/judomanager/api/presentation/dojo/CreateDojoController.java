@@ -1,6 +1,7 @@
 package com.judomanager.api.presentation.dojo;
 
-import com.judomanager.api.presentation.dojo.request.CreateDojoRequest;
+import com.judomanager.api.presentation.dojo.model.request.CreateDojoRequest;
+import com.judomanager.api.presentation.dojo.usecase.CreateDojoUseCase;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.dojo.service.CreateDojoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CreateDojoController {
 
     private final CreateDojoService createDojoService;
+    private final CreateDojoUseCase createDojoUseCase;
 
     @Operation(summary = "관장님이 나의 도장을 생성한다.")
     @PostMapping
     public JMResponse<Void> creatDojo(@RequestBody CreateDojoRequest request){
-        createDojoService.createDojo(
-                request.masterId(),
+        createDojoUseCase.execute(request.masterId(),
                 request.name(),
                 request.location(),
                 request.phone(),

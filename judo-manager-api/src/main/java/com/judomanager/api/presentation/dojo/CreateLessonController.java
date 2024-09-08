@@ -1,6 +1,6 @@
 package com.judomanager.api.presentation.dojo;
 
-import com.judomanager.api.presentation.dojo.request.CreateLessonRequest;
+import com.judomanager.api.presentation.dojo.model.request.CreateLessonRequest;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.dojo.service.CreateLessonService;
 import io.swagger.v3.oas.annotations.tags.Tag;

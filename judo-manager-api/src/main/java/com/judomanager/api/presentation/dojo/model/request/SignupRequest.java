@@ -1,4 +1,4 @@
-package com.judomanager.api.presentation.dojo.request;
+package com.judomanager.api.presentation.dojo.model.request;
 
 public class SignupRequest {
 

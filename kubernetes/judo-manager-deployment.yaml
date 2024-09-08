@@ -20,4 +20,16 @@ spec:
           image: ghosttrio/judo-manager
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
-      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: judo-manager-service
+spec:
+  selector:
+    app: judo-manager-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort

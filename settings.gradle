@@ -1,8 +1,0 @@
-rootProject.name = 'judo-manager'
-include 'judo-manager-admin'
-include 'judo-manager-api'
-include 'judo-manager-batch'
-include 'judo-manager-chat'
-include 'judo-manager-common'
-include 'judo-manager-domain'
-include 'judo-manager-infrastructure'

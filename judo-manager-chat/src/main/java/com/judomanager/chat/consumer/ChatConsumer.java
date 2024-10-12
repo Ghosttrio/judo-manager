@@ -1,7 +1,7 @@
 package com.judomanager.chat.consumer;
 
 import com.judomanager.common.util.ChatDto;
-import com.judomanager.domain.chat.service.CreateChatService;
+import com.judomanager.chat.domain.chat.service.CreateChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

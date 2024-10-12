@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/judo-manager-admin/judo-manager-admin.iml" filepath="$PROJECT_DIR$/judo-manager-admin/judo-manager-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-domain/judo-manager.judo-manager-domain.test.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-domain/judo-manager.judo-manager-domain.test.iml" />
+    </modules>
+  </component>
+</project>

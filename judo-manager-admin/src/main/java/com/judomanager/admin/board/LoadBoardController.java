@@ -3,8 +3,6 @@ package com.judomanager.admin.board;
 import com.judomanager.common.exception.JMResponse;
 import com.judomanager.domain.board.domain.Board;
 import com.judomanager.domain.board.service.LoadBoardService;
-import com.judomanager.domain.dojo.domain.Dojo;
-import com.judomanager.domain.dojo.service.LoadDojoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

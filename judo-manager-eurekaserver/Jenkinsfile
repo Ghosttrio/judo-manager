@@ -5,11 +5,10 @@ pipeline {
         stage('CLONE') {
             steps {
                 script{
-                    git branch: 'develop', url: 'https://github.com/Ghosttrio/judo-manager.git'
+                    git branch: 'develop', credentialsId: 'github_access_token', url: 'https://github.com/Ghosttrio/judo-manager.git'
                 }
             }
         }
-
         stage('BUILD'){
             steps{
                 dir('judo-manager-eurekaserver') {

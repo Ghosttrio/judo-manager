@@ -1,0 +1,19 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: judo-manager-configuration
+  cloud:
+    config:
+      server:
+        git:
+          uri: git
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka

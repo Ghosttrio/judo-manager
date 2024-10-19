@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  admin:
+    image: ghosttrio/judo-manager-admin:latest
+    ports:
+      - "8082:8080"
+  apigateway:
+    image: ghosttrio/judo-manager-apigateway:latest
+    ports:
+      - "8081:8080"
+  attendance:
+    image: ghosttrio/judo-manager-attendance:latest
+    ports:
+      - "8082:8080"
+  auth:
+    image: ghosttrio/judo-manager-auth:latest
+    ports:
+      - "8081:8080"
+  batch:
+    image: ghosttrio/judo-manager-batch:latest
+    ports:
+      - "8082:8080"
+  board:
+    image: ghosttrio/judo-manager-board:latest
+    ports:
+      - "8081:8080"
+  chat:
+    image: ghosttrio/judo-manager-chat:latest
+    ports:
+      - "8082:8080"
+  configuration:
+    image: ghosttrio/judo-manager-configuration:latest
+    ports:
+      - "8081:8080"
+  dojo:
+    image: ghosttrio/judo-manager-dojo:latest
+    ports:
+      - "8082:8080"
+  eurekaserver:
+    image: ghosttrio/judo-manager-eurekaserver:latest
+    ports:
+      - "8081:8080"
+  notice:
+    image: ghosttrio/judo-manager-notice:latest
+    ports:
+      - "8082:8080"
+  payment:
+    image: ghosttrio/judo-manager-payment:latest
+    ports:
+      - "8081:8080"
+  schedule:
+    image: ghosttrio/judo-manager-schedule:latest
+    ports:
+      - "8082:8080"
+  search:
+    image: ghosttrio/judo-manager-search:latest
+    ports:
+      - "8081:8080"
+  user:
+    image: ghosttrio/judo-manager-user:latest
+    ports:
+      - "8082:8080"

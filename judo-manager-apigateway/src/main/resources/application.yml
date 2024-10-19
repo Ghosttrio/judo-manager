@@ -1,0 +1,51 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: judo-manager-apigateway
+  cloud:
+    gateway:
+      routes:
+        - id: judo-manager-admin
+          uri: lb://JUDO-MANAGER-ADMIN
+          predicates:
+            - Path=/api/v1/admins/**
+        - id: judo-manager-attendance
+          uri: lb://JUDO-MANAGER-ATTENDANCE
+          predicates:
+            - Path=/api/v1/attendances/**
+        - id: judo-manager-board
+          uri: lb://JUDO-MANAGER-BOARD
+          predicates:
+            - Path=/api/v1/boards/**
+        - id: judo-manager-notice
+          uri: lb://JUDO-MANAGER-NOTICE
+          predicates:
+            - Path=/api/v1/notices/**
+        - id: judo-manager-dojo
+          uri: lb://JUDO-MANAGER-DOJO
+          predicates:
+            - Path=/api/v1/dojos/**
+        - id: judo-manager-payment
+          uri: lb://JUDO-MANAGER-PAYMENT
+          predicates:
+            - Path=/api/v1/payments/**
+        - id: judo-manager-schedule
+          uri: lb://JUDO-MANAGER-SCHEDULE
+          predicates:
+            - Path=/api/v1/schedules/**
+        - id: judo-manager-search
+          uri: lb://JUDO-MANAGER-SEARCH
+          predicates:
+            - Path=/api/v1/search/**
+        - id: judo-manager-user
+          uri: lb://JUDO-MANAGER-USER
+          predicates:
+            - Path=/api/v1/users/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

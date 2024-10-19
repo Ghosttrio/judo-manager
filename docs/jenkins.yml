@@ -1,0 +1,8 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "1000:1000"
+    volumes:
+      - /local/jenkins_home:/var/jenkins_home

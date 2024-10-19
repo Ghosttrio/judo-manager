@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/judo-manager-admin/judo-manager-admin.iml" filepath="$PROJECT_DIR$/judo-manager-admin/judo-manager-admin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/judo-manager-chat/judo-manager-chat.iml" filepath="$PROJECT_DIR$/judo-manager-chat/judo-manager-chat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-domain/judo-manager.judo-manager-domain.test.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-domain/judo-manager.judo-manager-domain.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-admin/judo-manager.judo-manager-admin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-admin/judo-manager.judo-manager-admin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-attendance/judo-manager.judo-manager-attendance.main.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-attendance/judo-manager.judo-manager-attendance.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-auth/judo-manager.judo-manager-auth.main.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-auth/judo-manager.judo-manager-auth.main.iml" />
     </modules>
   </component>
 </project>

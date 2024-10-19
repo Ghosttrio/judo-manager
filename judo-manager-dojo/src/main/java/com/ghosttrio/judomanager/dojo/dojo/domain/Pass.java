@@ -23,7 +23,4 @@ public class Pass {
     private Long lessonId; // 구입한 강습권
 
     private LocalDateTime expireTime; // 종료 시간
-
-
-
 }

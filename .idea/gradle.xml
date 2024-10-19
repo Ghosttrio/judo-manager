@@ -10,21 +10,20 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/judo-manager-admin" />
-            <option value="$PROJECT_DIR$/judo-manager-api" />
+            <option value="$PROJECT_DIR$/judo-manager-apigateway" />
+            <option value="$PROJECT_DIR$/judo-manager-attendance" />
+            <option value="$PROJECT_DIR$/judo-manager-auth" />
             <option value="$PROJECT_DIR$/judo-manager-batch" />
+            <option value="$PROJECT_DIR$/judo-manager-board" />
             <option value="$PROJECT_DIR$/judo-manager-chat" />
-            <option value="$PROJECT_DIR$/judo-manager-common" />
-            <option value="$PROJECT_DIR$/judo-manager-domain" />
-            <option value="$PROJECT_DIR$/judo-manager-infrastructure" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/judo-manager-api-gateway" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/judo-manager-api-gateway" />
+            <option value="$PROJECT_DIR$/judo-manager-configuration" />
+            <option value="$PROJECT_DIR$/judo-manager-dojo" />
+            <option value="$PROJECT_DIR$/judo-manager-eurekaserver" />
+            <option value="$PROJECT_DIR$/judo-manager-notice" />
+            <option value="$PROJECT_DIR$/judo-manager-payment" />
+            <option value="$PROJECT_DIR$/judo-manager-schedule" />
+            <option value="$PROJECT_DIR$/judo-manager-search" />
+            <option value="$PROJECT_DIR$/judo-manager-user" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -52,6 +51,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/judo-manager-auth" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/judo-manager-batch" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/judo-manager-batch" />
           </set>
         </option>
       </GradleProjectSettings>

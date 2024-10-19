@@ -7,6 +7,7 @@ pipeline {
                 git branch: 'develop', credentialsId: 'test', url: 'https://github.com/Ghosttrio/judo-manager.git'
             }
         }
+
         stage('BUILD'){
             steps{
                 dir('judo-manager-eurekaserver') {

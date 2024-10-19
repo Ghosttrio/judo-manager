@@ -32,7 +32,7 @@ pipeline {
 
                                             docker ps -q --filter name=judo-manager-eurekaserver | grep -q . && docker rm -f $(docker ps -aq --filter name=judo-manager-eurekaserver)
 
-                                            docker run -d --name=judo-manager-eurekaserver -p 8000:8000 -e TZ=Asia/Seoul ghosttrio/judo-manager-eurekaserver:latest
+                                            docker run -d --name=judo-manager-eurekaserver -p 8761:8761 -e TZ=Asia/Seoul ghosttrio/judo-manager-eurekaserver:latest
                                         ''',
                                         execTimeout: 200000,
                                         flatten: false,

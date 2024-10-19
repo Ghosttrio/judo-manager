@@ -13,6 +13,7 @@ pipeline {
             steps{
                 dir('judo-manager-eurekaserver') {
                     sh '''
+                        ls -al
                         chmod +x gradlew
                         ./gradlew clean build
                     '''

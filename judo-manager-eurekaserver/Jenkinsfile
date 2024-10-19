@@ -16,7 +16,6 @@ pipeline {
                         chmod +x gradlew
                         ./gradlew clean build
                     '''
-
                     sshPublisher(
                         publishers: [
                             sshPublisherDesc(

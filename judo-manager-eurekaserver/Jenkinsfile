@@ -6,6 +6,12 @@ pipeline {
             steps {
                 script{
                     git 'https://github.com/Ghosttrio/judo-manager.git'
+                }
+            }
+        }
+        stage('BUILD'){
+            steps{
+                script{
                     sh '''
                         cd judo-manager-eurekaserver
                         chmod +x gradlew

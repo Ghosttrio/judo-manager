@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('CLONE') {
             steps {
-                script{
-                    git branch: 'develop', credentialsId: 'judo-manager-credential', url: 'https://github.com/Ghosttrio/judo-manager.git'
-                }
+                git branch: 'develop', credentialsId: 'judo-manager-credential', url: 'https://github.com/Ghosttrio/judo-manager.git'
             }
         }
 

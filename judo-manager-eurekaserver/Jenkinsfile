@@ -5,38 +5,14 @@ pipeline {
         stage('CLONE') {
             steps {
                 script{
-                    echo '연결 성공'
+                    git 'https://github.com/Ghosttrio/judo-manager.git'
+                    sh '''
+                        cd judo-manager-eurekaserver
+                        chmod +x gradlew
+                        ./gradlew clean build
+                    '''
                 }
             }
         }
     }
-//     post {
-//          success {
-//             script{
-//                slackSend (
-//                    channel: '#개발',
-//                    color: '#00FF00',
-//                    message: '배포 성공'
-//                )
-//             }
-//          }
-//         unstable {
-//             script{
-//                slackSend (
-//                    channel: '#개발',
-//                    color: '#00FF00',
-//                    message: '불완전 배포'
-//                )
-//             }
-//         }
-//          failure {
-//              script{
-//                 slackSend (
-//                    channel: '#개발',
-//                    color: '#00FF00',
-//                    message: '배포 실패'
-//                 )
-//              }
-//          }
-//     }
 }

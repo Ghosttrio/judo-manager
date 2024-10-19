@@ -9,6 +9,7 @@ pipeline {
                 }
             }
         }
+
         stage('BUILD'){
             steps{
                 dir('judo-manager-eurekaserver') {

@@ -11,9 +11,8 @@ pipeline {
         }
         stage('BUILD'){
             steps{
-                script{
+                dir('judo-manager-eurekaserver') {
                     sh '''
-                        cd judo-manager-eurekaserver
                         chmod +x gradlew
                         ./gradlew clean build
                     '''

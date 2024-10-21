@@ -6,11 +6,19 @@ spring:
     name: judo-manager-apigateway
   cloud:
     gateway:
+      default-filters:
+        - name: JudoManagerGlobalFilter
+          args:
+            baseMessage: JudoManager GlobalFilter Test
+            preLogger: true
+            postLogger: true
       routes:
         - id: judo-manager-admin
           uri: lb://JUDO-MANAGER-ADMIN
           predicates:
             - Path=/api/v1/admins/**
+          filters:
+            - JudoManagerFilter
         - id: judo-manager-attendance
           uri: lb://JUDO-MANAGER-ATTENDANCE
           predicates:
@@ -43,9 +51,13 @@ spring:
           uri: lb://JUDO-MANAGER-USER
           predicates:
             - Path=/api/v1/users/**
+
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+token:
+  secret: localtestsecret123456890localtestsecret123456890localtestsecret123456890

@@ -3,7 +3,7 @@ package com.ghosttrio.judomanager.user.common.exception;
 import lombok.Getter;
 
 @Getter
-public class JMException extends RuntimeException{
+public class JMException extends RuntimeException {
 
     private final ErrorCode errorCode;
 

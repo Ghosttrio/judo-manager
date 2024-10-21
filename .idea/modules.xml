@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-apigateway/judo-manager.judo-manager-apigateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-apigateway/judo-manager.judo-manager-apigateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-dojo/judo-manager.judo-manager-dojo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-dojo/judo-manager.judo-manager-dojo.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/judo-manager-user/judo-manager.judo-manager-user.main.iml" filepath="$PROJECT_DIR$/.idea/modules/judo-manager-user/judo-manager.judo-manager-user.main.iml" />
     </modules>
   </component>
 </project>

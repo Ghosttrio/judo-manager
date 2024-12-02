@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: judo-manager-auth
+  config:
+    import: optional:configserver:http://localhost:9999

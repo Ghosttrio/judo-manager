@@ -1,0 +1,1 @@
+package com.ghosttrio.judomanager.batch.feign.model.response;public record User(        Long userId,        String email,        String nickname) {}

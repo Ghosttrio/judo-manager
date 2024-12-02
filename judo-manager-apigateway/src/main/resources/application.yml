@@ -1,0 +1,99 @@
+spring:
+  application:
+    name: judo-manager-apigateway
+  kafka:
+    bootstrap-servers: 172.27.198.84:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  rabbitmq:
+    host: 192.168.0.7
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    gateway:
+      default-filters:
+        - name: LoggingFilter
+      routes:
+        - id: judo-manager-admin
+          uri: lb://JUDO-MANAGER-ADMIN
+          predicates:
+            - Path=/api/v1/admins/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-attendance
+          uri: lb://JUDO-MANAGER-ATTENDANCE
+          predicates:
+            - Path=/api/v1/attendances/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-board
+          uri: lb://JUDO-MANAGER-BOARD
+          predicates:
+            - Path=/api/v1/boards/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-notice
+          uri: lb://JUDO-MANAGER-NOTICE
+          predicates:
+            - Path=/api/v1/notices/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-dojo
+          uri: lb://JUDO-MANAGER-DOJO
+          predicates:
+            - Path=/api/v1/dojos/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-payment
+          uri: lb://JUDO-MANAGER-PAYMENT
+          predicates:
+            - Path=/api/v1/payments/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-schedule
+          uri: lb://JUDO-MANAGER-SCHEDULE
+          predicates:
+            - Path=/api/v1/schedules/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-search
+          uri: lb://JUDO-MANAGER-SEARCH
+          predicates:
+            - Path=/api/v1/search/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-auth
+          uri: lb://JUDO-MANAGER-AUTH
+          predicates:
+            - Path=/api/v1/auth/login
+        - id: judo-manager-user
+          uri: lb://JUDO-MANAGER-USER
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - AuthorizationFilter
+        - id: judo-manager-user-signup
+          uri: lb://JUDO-MANAGER-USER
+          predicates:
+            - Path=/api/v1/users/signup
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+token:
+  secret: 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health, refresh, busrefresh
+  server:
+    port: 9090
+server:
+  port: 8000

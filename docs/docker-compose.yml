@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/config/:/etc/prometheus/
+      - ./prometheus/prometheus-volume:/prometheus
+    command:
+      - '--web.enable-lifecycle'
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: always
+    networks:
+      - goodjob-network
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/grafana-volume:/var/lib/grafana
+      - ./grafana/config/grafana-init.ini:/etc/grafana/grafana.ini
+    restart: always
+    user: "$UID:$GID"
+    networks:
+      - goodjob-network
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "Topic:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock
+    depends_on:
+      - zookeeper
+networks:
+  goodjob-network:
+    driver: bridge
+

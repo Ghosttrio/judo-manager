@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+        stage('CLONE') {
+            steps {
+                script{
+                    git branch: 'develop', credentialsId: 'gitHub-token', url: ''
+                }
+            }
+        }
+    }
+}

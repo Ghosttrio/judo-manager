@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>judo manager oauth test client</title>
+</head>
+<body>
+<input type="hidden" th:id="code" th:value="${token}">
+    <button onclick="secondStep()">사용자 정보 요청</button>
+</body>
+<script>
+    function secondStep() {
+        let code = document.getElementById('code').value;
+        window.location.href = 'http://localhost:8080/api/v1/auth/mock/info?code=' + code;
+    }
+</script>
+</html>

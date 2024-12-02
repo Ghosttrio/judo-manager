@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: judo-manager-search
+  elasticsearch:
+    uris: http://localhost:9200
+  kafka:
+    bootstrap-servers: 172.27.198.84:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          elasticsearch:
+            client:
+              WIRE: TRACE

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>judo manager oauth test client</title>
+</head>
+<body>
+    <button onclick="firstStep()">인가코드받기</button>
+</body>
+<script>
+    function firstStep() {
+        window.location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=c217c887eaa05455ec9f895e38c76e5d&redirect_uri=http://localhost:8080/api/v1/auth/mock/oauth&response_type=code'
+    }
+
+</script>
+</html>

@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('CLONE') {
+            steps {
+                git branch: 'develop', credentialsId: 'test', url: 'https://github.com/Ghosttrio/judo-manager.git'
+            }
+        }
+
+        stage('BUILD'){
+            steps{
+                dir('judo-manager-eurekaserver') {
+                    sh '''
+                        chmod +x gradlew
+                        ./gradlew clean build
+                    '''
+                    sshPublisher(
+                        publishers: [
+                            sshPublisherDesc(
+                                configName: 'ghosttrio-server',
+                                transfers: [
+                                    sshTransfer(
+                                        cleanRemote: false,
+                                        excludes: '',
+                                        execCommand: '''
+                                            docker build -t ghosttrio/judo-manager-eurekaserver:latest
+
+                                            docker pull ghosttrio/judo-manager-eurekaserver:latest
+
+                                            docker ps -q --filter name=judo-manager-eurekaserver | grep -q . && docker rm -f $(docker ps -aq --filter name=judo-manager-eurekaserver)
+
+                                            docker run -d --name=judo-manager-eurekaserver -p 8761:8761 -e TZ=Asia/Seoul ghosttrio/judo-manager-eurekaserver:latest
+                                        ''',
+                                        execTimeout: 200000,
+                                        flatten: false,
+                                        makeEmptyDirs: false,
+                                        noDefaultExcludes: false,
+                                        patternSeparator: '[, ]+',
+                                        remoteDirectory: '',
+                                        remoteDirectorySDF: false,
+                                        removePrefix: '',
+                                        sourceFiles: '**/*.jar'
+                                    )
+                                ],
+                                usePromotionTimestamp: false,
+                                useWorkspaceInPromotion: false,
+                                verbose: false
+                            )
+                        ]
+                    )
+                }
+            }
+        }
+    }
+}

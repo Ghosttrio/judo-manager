@@ -1,0 +1,1 @@
+package com.ghosttrio.judomanager.batch.util.slack;public interface SlackUtil {    void pdfSend(byte[] pdf);    void messageSend(String message);}

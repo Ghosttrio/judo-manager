@@ -1,0 +1,16 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: judo-manager-configuration
+  rabbitmq:
+    host: 192.168.0.7
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Ghosttrio/judo-manager-config.git
+          default-label: master

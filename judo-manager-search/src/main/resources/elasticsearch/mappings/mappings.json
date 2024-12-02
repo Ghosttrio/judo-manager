@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "oaddr": {
+      "type": "text",
+      "analyzer": "korean"
+    }
+  }
+}

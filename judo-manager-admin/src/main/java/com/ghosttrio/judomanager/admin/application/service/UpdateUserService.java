@@ -1,11 +1,10 @@
 package com.ghosttrio.judomanager.admin.application.service;
 
-import com.ghosttrio.judomanager.admin.adapter.port.out.feign.dojo.model.DojoState;
 import com.ghosttrio.judomanager.admin.application.port.out.UserClientPort;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Supplier;
@@ -15,7 +14,7 @@ import java.util.function.Supplier;
 public class UpdateUserService {
 
     private final UserClientPort userClientPort;
-    private final CircuitBreakerFactory circuitBreakerFactory;
+    private final Resilience4JCircuitBreakerFactory circuitBreakerFactory;
 
     @Transactional
     public void ban(Long userId) {

@@ -25,13 +25,6 @@ public class UpdateUserService {
         userPersistencePort.save(userDomain);
     }
 
-
-//    @Transactional
-//    public void lastLogin(Long userId) {
-//        UserEntity userEntity = loadUserService.findById(userId);
-//        userEntity.updateLoginDate();
-//    }
-
     @Transactional
     public void updateNickname(Long userId, String nickname) {
         UserDomain userDomain = loadUserService.findById(userId);
@@ -42,13 +35,8 @@ public class UpdateUserService {
     @Transactional
     public void update(Long userId, String dojoCode) {
 
-        // 서킷 브레이커 적용 전
-//        Long dojoId = findByDojoCode(dojoCode);
-
-        // 서킷 브레이커 적용 후
-        CircuitBreaker circuitebreaker = circuitBreakerFactory.create("circuitebreaker");
-        Long dojoId = circuitebreaker.run(() -> findByDojoCode(dojoCode), throwable -> 0L);
-
+        CircuitBreaker circuitbreaker = circuitBreakerFactory.create("userUpdateCB");
+        Long dojoId = circuitbreaker.run(() -> findByDojoCode(dojoCode), throwable -> 0L);
 
         UserDomain userDomain = loadUserService.findById(userId);
         userDomain.setDojo(dojoId);

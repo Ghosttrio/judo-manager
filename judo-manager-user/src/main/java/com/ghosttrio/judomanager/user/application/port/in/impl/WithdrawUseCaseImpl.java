@@ -1,6 +1,7 @@
-package com.ghosttrio.judomanager.user.application.port.in;
+package com.ghosttrio.judomanager.user.application.port.in.impl;
 
 
+import com.ghosttrio.judomanager.user.application.port.in.WithdrawUseCase;
 import com.ghosttrio.judomanager.user.application.service.WithdrawService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

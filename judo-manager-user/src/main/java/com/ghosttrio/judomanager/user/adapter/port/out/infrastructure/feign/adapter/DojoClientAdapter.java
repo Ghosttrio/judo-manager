@@ -1,14 +1,15 @@
-package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign;
+package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign.adapter;
 
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign.client.DojoClient;
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign.model.Dojo;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 @RequiredArgsConstructor
-public class DojoClientAdapter implements UserClientPort {
+public class
+DojoClientAdapter implements UserClientPort {
 
     private final DojoClient dojoClient;
 

@@ -1,6 +1,7 @@
-package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa;
+package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.adapter;
 
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserEntity;
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository.UserRepository;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
 import com.ghosttrio.judomanager.user.domain.UserDomain;

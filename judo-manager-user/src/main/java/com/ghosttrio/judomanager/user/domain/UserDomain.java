@@ -22,8 +22,7 @@ public class UserDomain {
 	private LocalDateTime updatedAt;
 	private Long dojoId;
 
-	/* User 생성 */
-	public static UserDomain create(String email, String nickname, UserRole role) {
+	public static UserDomain createUser(String email, String nickname, UserRole role) {
 		return new UserDomain(
 			null,
 			nickname,

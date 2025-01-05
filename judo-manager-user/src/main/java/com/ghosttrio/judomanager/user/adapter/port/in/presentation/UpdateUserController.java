@@ -29,7 +29,7 @@ public class UpdateUserController {
     }
 
     @Operation(summary = "유저의 도장 정보를 변경합니다.")
-    @PatchMapping("/dojo/{userId}")
+    @PatchMapping("/{userId}/dojo")
     public JMResponse<Void> updateDojo(@PathVariable Long userId,
                                        @RequestBody UserRequest.Dojo request) {
         updateDojoUseCase.execute(userId, request.dojoCode());
@@ -37,10 +37,12 @@ public class UpdateUserController {
     }
 
     @Operation(summary = "유저의 상태 정보를 변경합니다.")
-    @PatchMapping("/status/{userId}")
-    public JMResponse<Void> updateDojo(@PathVariable Long userId) {
+    @PatchMapping("/{userId}/status")
+    public JMResponse<Void> updateStatus(@PathVariable Long userId) {
         updateUserStatusUseCase.execute(userId);
         return JMResponse.ok();
     }
+
+    // 유저의 승단 결과 업데이트
 
 }

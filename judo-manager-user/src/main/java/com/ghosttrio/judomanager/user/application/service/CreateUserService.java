@@ -23,7 +23,7 @@ public class CreateUserService {
     public void signup(String email, String nickname, UserRole role){
         checkDuplicateEmail(email);
         checkDuplicateNickname(nickname);
-        UserDomain userDomain = UserDomain.create(email, nickname, role);
+        UserDomain userDomain = UserDomain.createUser(email, nickname, role);
         userPersistencePort.save(userDomain);
     }
 

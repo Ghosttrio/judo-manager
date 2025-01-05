@@ -24,4 +24,5 @@ public class UserEntity extends BaseEntity {
     private String email; // 카카오 로그인 메일
     private LocalDateTime lastLoginDate;
     private UserState state;
+
 }

@@ -2,6 +2,7 @@ package com.ghosttrio.judomanager.user.domain;
 
 import java.time.LocalDateTime;
 
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.Grade;
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserRole;
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
 
@@ -32,7 +33,8 @@ public class UserDomain {
 			LocalDateTime.now(),
 			LocalDateTime.now(),
 			LocalDateTime.now(),
-			0L); // 0L은 미등록 도장 코드
+			0L
+		); // 0L은 미등록 도장 코드
 	}
 
 	public UserDomain withDrawUser() {
@@ -57,5 +59,9 @@ public class UserDomain {
 
 	public void updateStatus() {
 		this.state = UserState.DEACTIVATED;
+	}
+
+	public void updateDan() {
+
 	}
 }

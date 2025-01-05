@@ -1,5 +1,6 @@
 package com.ghosttrio.judomanager.user.application.service;
 
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.Grade;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
@@ -47,4 +48,10 @@ public class UpdateUserService {
         return userClientPort.findDojoByDojoCode(dojoCode).getDojoId();
     }
 
+    @Transactional
+    public void promotionGrade(Long userId) {
+        Grade grade = userClientPort.findUserGrade(userId);
+        Grade result = grade.promotion();
+        // todo 알림 메시지 보내기
+    }
 }

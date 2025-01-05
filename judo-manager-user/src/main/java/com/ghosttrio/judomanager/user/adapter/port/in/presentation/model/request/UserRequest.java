@@ -5,13 +5,18 @@ import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity
 public class UserRequest {
 
     public record Create(
-        String email,
-        String nickname,
-        UserRole role
+            String email,
+            String nickname,
+            UserRole role
     ) {
     }
 
-    public record Nickname(String nickname){}
+    public record Nickname(String nickname) {
+    }
 
-    public record Dojo(String dojoCode){}
+    public record Dojo(String dojoCode) {
+    }
+
+    public record Dan(Long grade) {
+    }
 }

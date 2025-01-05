@@ -16,6 +16,7 @@ public enum ErrorCode {
 	INVALID_ATTENDANCE_TIME(BAD_REQUEST, "등록한 레슨 시간과 출석 시간이 맞지 않습니다."),
 	PASS_EXPIRED(BAD_REQUEST, "회원권이 만료되었습니다."),
 	PASSWORD_INCORRECT_REQUEST(BAD_REQUEST, "암호화 된 암호와 일치하지 않습니다."),
+	DAN_PROMOTION_BAD_REQUEST(BAD_REQUEST, "10단은 승급을 할 수 없습니다."),
 
 	// 401 인증 오류
 	INVALID_BEARER_TOKEN(BAD_REQUEST, "유효한 Bearer 토큰의 형식이 아닙니다."),

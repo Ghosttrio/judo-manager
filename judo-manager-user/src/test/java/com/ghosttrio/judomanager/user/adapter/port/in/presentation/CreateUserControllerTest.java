@@ -38,7 +38,7 @@ class CreateUserControllerTest extends MonkeySupport {
     @Test
     @DisplayName("회원가입 성공 테스트")
     void 회원가입이_성공해야_한다() throws Exception {
-        UserRequest.Create request = new UserRequest.Create("email", "nickname", MASTER);
+        UserRequest.Create request = monkey.giveMeOne(UserRequest.Create.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/users/signup")
                         .content(objectMapper.writeValueAsString(request))
                         .contentType(APPLICATION_JSON))

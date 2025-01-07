@@ -2,7 +2,7 @@ package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign.ada
 
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign.client.DojoClient;
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.feign.model.Dojo;
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.Grade;
+import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

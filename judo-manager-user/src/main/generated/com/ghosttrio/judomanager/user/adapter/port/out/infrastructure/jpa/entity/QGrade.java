@@ -2,6 +2,7 @@ package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entit
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.ghosttrio.judomanager.user.domain.Grade;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

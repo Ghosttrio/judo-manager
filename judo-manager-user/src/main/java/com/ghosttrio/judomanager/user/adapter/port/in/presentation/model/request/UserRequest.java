@@ -7,8 +7,23 @@ public class UserRequest {
     public record Create(
             String email,
             String nickname,
-            UserRole role
+            UserRole role,
+            String location,
+            Double latitude,
+            Double longitude
     ) {
+        public CreateUserServiceRequest toService() {
+            return new CreateUserServiceRequest(email, nickname, role, location, latitude, longitude);
+        }
+        public record CreateUserServiceRequest(
+                String email,
+                String nickname,
+                UserRole role,
+                String location,
+                Double latitude,
+                Double longitude
+        )  {
+        }
     }
 
     public record Nickname(String nickname) {

@@ -1,7 +1,8 @@
 package com.ghosttrio.judomanager.user.application.service;
 
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserRole;
+import com.ghosttrio.judomanager.user.adapter.port.in.presentation.model.request.UserRequest.Create.CreateUserServiceRequest;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
+import com.ghosttrio.judomanager.user.common.MonkeySupport;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CreateUserServiceTest {
+class CreateUserServiceTest extends MonkeySupport {
 
     @InjectMocks
     private CreateUserService createUserService;
@@ -22,13 +23,11 @@ class CreateUserServiceTest {
     @Test
     void signup() {
         //given
-        String email = "testEmail";
-        String nickname = "testNick";
-        UserRole role = UserRole.MASTER;
-        when(userPersistencePort.isDuplicateUser(email)).thenReturn(false);
-        when(userPersistencePort.isDuplicateNickname(nickname)).thenReturn(false);
+        CreateUserServiceRequest request = monkey.giveMeOne(CreateUserServiceRequest.class);
+        when(userPersistencePort.isDuplicateUser(request.email())).thenReturn(false);
+        when(userPersistencePort.isDuplicateNickname(request.nickname())).thenReturn(false);
         //when
-        createUserService.signup(email, nickname, role);
+        createUserService.signup(request);
         //then
         verify(userPersistencePort, times(1)).save(any(UserDomain.class));
     }

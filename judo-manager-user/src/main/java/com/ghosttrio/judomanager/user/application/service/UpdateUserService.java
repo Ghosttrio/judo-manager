@@ -1,6 +1,6 @@
 package com.ghosttrio.judomanager.user.application.service;
 
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.Grade;
+import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
@@ -29,7 +29,7 @@ public class UpdateUserService {
     @Transactional
     public void updateNickname(Long userId, String nickname) {
         UserDomain userDomain = loadUserService.findById(userId);
-        userDomain.updateNickname(nickname);
+        userDomain.changeUserNickname(nickname);
         userPersistencePort.save(userDomain);
     }
 

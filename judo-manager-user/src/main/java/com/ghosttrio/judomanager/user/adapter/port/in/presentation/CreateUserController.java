@@ -24,7 +24,7 @@ public class CreateUserController {
 	@Operation(description = "User 를 생성합니다.")
 	@PostMapping("/signup")
 	public JMResponse<Void> signup(@RequestBody UserRequest.Create request) {
-		createUserUseCase.execute(request.email(), request.nickname(), request.role());
+		createUserUseCase.execute(request.toService());
 		return JMResponse.ok();
 	}
 }

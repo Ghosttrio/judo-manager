@@ -26,7 +26,7 @@ public class WithdrawService {
     }
 
     private void deleteTokenInfo(UserDomain userDomain) {
-        String email = userDomain.getEmail();
+        String email = userDomain.getUserProfile().getEmail();
         userRedisPort.deleteValues(email);
     }
 

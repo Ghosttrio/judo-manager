@@ -1,4 +1,4 @@
-package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity;
+package com.ghosttrio.judomanager.user.domain;
 
 import com.ghosttrio.judomanager.user.common.exception.JMException;
 import jakarta.persistence.Embeddable;
@@ -7,6 +7,8 @@ import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.DAN_PROM
 
 @Embeddable
 public enum Grade {
+
+    //todo 벨트랑 단을 합치는 방법?
     KYU1,
     KYU2,
     KYU3,

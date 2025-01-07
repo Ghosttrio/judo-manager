@@ -1,6 +1,7 @@
 package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity;
 
 import com.ghosttrio.judomanager.user.common.exception.JMException;
+import com.ghosttrio.judomanager.user.domain.Grade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

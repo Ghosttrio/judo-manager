@@ -3,6 +3,7 @@ package com.ghosttrio.judomanager.user.application.service;
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
+import com.ghosttrio.judomanager.user.common.exception.ErrorCode;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
 import com.ghosttrio.judomanager.user.domain.Belt;
 import com.ghosttrio.judomanager.user.domain.Grade;
@@ -42,9 +43,17 @@ public class UpdateUserService {
 
     @Transactional
     public void updateNickname(Long userId, String nickname) {
+        checkDuplicateNickname(nickname);
         UserDomain userDomain = loadUserService.findById(userId);
         userDomain.changeUserNickname(nickname);
         userPersistencePort.save(userDomain);
+    }
+
+    private void checkDuplicateNickname(String nickname) {
+        boolean isDuplicate = userPersistencePort.isDuplicateNickname(nickname);
+        if (isDuplicate) {
+            throw new JMException(ErrorCode.EMAIL_DUPLICATE);
+        }
     }
 
     @Transactional

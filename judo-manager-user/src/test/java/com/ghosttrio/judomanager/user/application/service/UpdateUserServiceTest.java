@@ -57,6 +57,28 @@ public class UpdateUserServiceTest extends MonkeySupport {
     }
 
     @Test
+    void 유저의_닉네임이_업데이트_되어야_한다() {
+        Long userId = 1L;
+        String nickname = "testNick";
+        UserDomain userDomain = monkey.giveMeOne(UserDomain.class);
+
+        when(userPersistencePort.isDuplicateNickname(nickname)).thenReturn(false);
+        when(loadUserService.findById(userId)).thenReturn(userDomain);
+
+        updateUserService.updateNickname(userId, nickname);
+
+        verify(userPersistencePort).save(userDomain);
+    }
+
+    @Test
+    void 유저의_닉네임이_중복된다면_에러가_발생한다() {
+        Long userId = 1L;
+        String nickname = "duplicatedNickname";
+        when(userPersistencePort.isDuplicateNickname(nickname)).thenReturn(true);
+        assertThrows(JMException.class, () -> updateUserService.updateNickname(userId, nickname));
+    }
+
+    @Test
     void 유저_아이디값을_입력하면_유저_승급이_되어야_한다() {
         UserDomain userDomain = monkey.giveMeBuilder(UserDomain.class)
                 .set("grade", Grade.DAN1)

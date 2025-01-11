@@ -52,7 +52,6 @@ public class UpdateUserServiceTest extends MonkeySupport {
                 .set("state", state)
                 .sample();
         when(loadUserService.findById(any(Long.class))).thenReturn(userDomain);
-
         Exception exception = assertThrows(JMException.class, () -> updateUserService.updateStatus(userDomain.getId()));
         assertEquals("유저의 비활성화는 활성화 상태의 유저만 요청할 수 있습니다.", exception.getMessage());
     }

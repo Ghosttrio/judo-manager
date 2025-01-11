@@ -3,8 +3,10 @@ package com.ghosttrio.judomanager.user.application.service;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
+import com.ghosttrio.judomanager.user.domain.Belt;
 import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
+import com.ghosttrio.judomanager.user.domain.UserDomain.PromotionResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
@@ -52,16 +54,17 @@ public class UpdateUserService {
 
     @Transactional
     public Grade promotionGrade(Long userId) {
-        Grade grade = validateUserDan(userId);
-        Grade promotinedGrade = grade.promotion();
-        userPersistencePort.updateUserDan(userId, promotinedGrade);
+        UserDomain userDomain = loadUserService.findById(userId);
+        validateUserDan(userDomain.getGrade());
+        PromotionResult promotionResult = userDomain.promotionGrade();
+        Grade promotionGrade = promotionResult.grade();
+        Belt promotionBelt = promotionResult.belt();
+        userPersistencePort.updateUserDan(userId, promotionGrade, promotionBelt);
         // todo 알림 메시지 보내기
-        return promotinedGrade;
+        return promotionGrade;
     }
 
-    private Grade validateUserDan(Long userId) {
-        Grade grade = userClientPort.findUserGrade(userId);
+    private void validateUserDan(Grade grade) {
         if (Grade.DAN10 == grade) throw new JMException(DAN_PROMOTION_BAD_REQUEST);
-        return grade;
     }
 }

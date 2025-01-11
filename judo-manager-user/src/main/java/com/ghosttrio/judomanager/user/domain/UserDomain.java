@@ -19,6 +19,7 @@ public class UserDomain {
     private LocalDateTime updatedAt;
     private Long dojoId;
     private Belt belt;
+    private Grade grade;
 
     public static UserDomain generateUserDomain(UserProfile userProfile) {
         return new UserDomain(
@@ -29,7 +30,8 @@ public class UserDomain {
                 LocalDateTime.now(),
                 LocalDateTime.now(),
                 0L,
-                Belt.WHITE); // 0L은 미등록 도장 코드
+                Belt.WHITE,
+                Grade.KYU1); // 0L은 미등록 도장 코드
     }
 
     @Builder
@@ -75,7 +77,16 @@ public class UserDomain {
         this.state = UserState.DEACTIVATED;
     }
 
-    public void updateDan() {
-
+    public PromotionResult promotionGrade() {
+        Grade promotionGrade = this.grade.promotion();
+        Belt promtionBelt = this.belt.promotion(promotionGrade);
+        return new PromotionResult(promotionGrade, promtionBelt);
     }
+
+    public record PromotionResult(
+            Grade grade,
+            Belt belt
+    ) {
+    }
+
 }

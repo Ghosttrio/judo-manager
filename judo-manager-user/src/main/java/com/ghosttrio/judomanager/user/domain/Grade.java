@@ -1,11 +1,7 @@
 package com.ghosttrio.judomanager.user.domain;
 
-import jakarta.persistence.Embeddable;
 
-@Embeddable
 public enum Grade {
-
-    //todo 벨트랑 단을 합치는 방법?
     KYU1,
     KYU2,
     KYU3,

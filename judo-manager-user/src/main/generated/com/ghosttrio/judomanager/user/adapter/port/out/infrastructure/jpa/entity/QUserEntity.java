@@ -21,6 +21,8 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
+    public final EnumPath<com.ghosttrio.judomanager.user.domain.Belt> belt = createEnum("belt", com.ghosttrio.judomanager.user.domain.Belt.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 

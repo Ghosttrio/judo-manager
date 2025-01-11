@@ -1,5 +1,6 @@
 package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity;
 
+import com.ghosttrio.judomanager.user.domain.Belt;
 import com.ghosttrio.judomanager.user.domain.Grade;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -26,5 +27,7 @@ public class UserEntity extends BaseEntity {
     private LocalDateTime lastLoginDate;
     private UserState state;
     private Grade grade;
+    private Belt belt;
+
 
 }

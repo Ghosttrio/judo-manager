@@ -1,6 +1,7 @@
-package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository;
+package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository.query.impl;
 
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserEntity;
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository.query.UserQueryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 

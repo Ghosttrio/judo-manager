@@ -1,4 +1,4 @@
-package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository;
+package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository.query;
 
 
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserEntity;

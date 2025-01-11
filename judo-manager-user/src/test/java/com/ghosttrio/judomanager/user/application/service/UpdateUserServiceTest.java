@@ -2,9 +2,12 @@ package com.ghosttrio.judomanager.user.application.service;
 
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
+import com.ghosttrio.judomanager.user.common.MonkeySupport;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
+import com.ghosttrio.judomanager.user.domain.Belt;
 import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
+import net.jqwik.api.Arbitrary;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +32,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class UpdateUserServiceTest {
+public class UpdateUserServiceTest extends MonkeySupport {
 
     @Mock
     private LoadUserService loadUserService;
@@ -44,20 +47,44 @@ public class UpdateUserServiceTest {
 
     @Test
     void 유저_아이디값을_입력하면_유저_승급이_되어야_한다() {
-        Long userId = 1L;
-        when(userClientPort.findUserGrade(any(Long.class))).thenReturn(Grade.DAN2);
-        Grade grade = updateUserService.promotionGrade(userId);
-        assertEquals(Grade.DAN3, grade);
+        UserDomain userDomain = monkey.giveMeBuilder(UserDomain.class)
+                .set("grade", Grade.DAN1)
+                .sample();
+        when(loadUserService.findById(any(Long.class))).thenReturn(userDomain);
+        Grade grade = updateUserService.promotionGrade(userDomain.getId());
+        assertEquals(Grade.DAN2, grade);
     }
 
     @Test
     void 단의_등급이_10단인_경우는_승급할_수_없다() {
-        Long userId = 1L;
-        when(userClientPort.findUserGrade(any(Long.class))).thenReturn(Grade.DAN10);
-        assertThrows(JMException.class, () -> updateUserService.promotionGrade(userId));
+        UserDomain userDomain = monkey.giveMeBuilder(UserDomain.class)
+                .set("grade", Grade.DAN10)
+                .sample();
+        when(loadUserService.findById(any(Long.class))).thenReturn(userDomain);
+        assertThrows(JMException.class, () -> updateUserService.promotionGrade(userDomain.getId()));
     }
 
+    @Test
+    void 각_급과_단에_맞는_벨트가_설정되어야_한다() {
+        /**
+         *  9 ~ 6 급 흰띠
+         *  5급 노랑띠
+         *  4급 주황띠
+         *  3급 초록띠
+         *  2급 파랑띠
+         *  1급 갈색띠
+         *  1단 ~ 5단 검은띠
+         *  6단 ~ 8단 용띠
+         *  9단 ~ 10단 빨간띠
+         */
 
+        Grade[] grades = Grade.values();
 
+        for (int i=0; i<grades.length; i++) {
+            int ordinal = grades[i].ordinal();
+
+        }
+
+    }
 
 }

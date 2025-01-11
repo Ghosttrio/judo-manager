@@ -1,5 +1,6 @@
 package com.ghosttrio.judomanager.user.application.port.out;
 
+import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
 
 
@@ -15,4 +16,7 @@ public interface UserPersistencePort {
     boolean isDuplicateUser(String email);
 
     boolean isDuplicateNickname(String nickname);
+
+    void updateUserDan(Long id, Grade grade);
+
 }

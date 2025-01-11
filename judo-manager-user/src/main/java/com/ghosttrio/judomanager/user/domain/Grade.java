@@ -1,9 +1,6 @@
 package com.ghosttrio.judomanager.user.domain;
 
-import com.ghosttrio.judomanager.user.common.exception.JMException;
 import jakarta.persistence.Embeddable;
-
-import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.DAN_PROMOTION_BAD_REQUEST;
 
 @Embeddable
 public enum Grade {
@@ -30,7 +27,6 @@ public enum Grade {
     DAN10;
 
     public Grade promotion() {
-        if (this == DAN10) throw new JMException(DAN_PROMOTION_BAD_REQUEST);
         Grade[] grades = Grade.values();
         int ordinal = this.ordinal() + 1;
         return grades[ordinal];

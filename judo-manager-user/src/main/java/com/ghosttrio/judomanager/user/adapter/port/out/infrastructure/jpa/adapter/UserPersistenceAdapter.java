@@ -4,6 +4,7 @@ import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.repository.UserRepository;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
+import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
 import com.ghosttrio.judomanager.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +56,10 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     public boolean isDuplicateNickname(String nickname) {
         Optional<UserEntity> userEntity = userRepository.findByNickname(nickname);
         return userEntity.isPresent();
+    }
+
+    @Override
+    public void updateUserDan(Long id, Grade grade) {
+        userRepository.updateUserDan(id, grade);
     }
 }

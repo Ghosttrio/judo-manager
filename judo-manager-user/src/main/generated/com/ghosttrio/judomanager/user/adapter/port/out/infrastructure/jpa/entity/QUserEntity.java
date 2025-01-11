@@ -28,6 +28,9 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final StringPath email = createString("email");
 
+    // custom
+    public final com.ghosttrio.judomanager.user.domain.QGrade grade = new com.ghosttrio.judomanager.user.domain.QGrade(forProperty("grade"));
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final DateTimePath<java.time.LocalDateTime> lastLoginDate = createDateTime("lastLoginDate", java.time.LocalDateTime.class);

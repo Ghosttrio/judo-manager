@@ -1,5 +1,6 @@
 package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity;
 
+import com.ghosttrio.judomanager.user.domain.Grade;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,6 @@ public class UserEntity extends BaseEntity {
     private String email; // 카카오 로그인 메일
     private LocalDateTime lastLoginDate;
     private UserState state;
+    private Grade grade;
 
 }

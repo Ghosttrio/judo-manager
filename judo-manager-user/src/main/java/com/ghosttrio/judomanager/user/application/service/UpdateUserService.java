@@ -1,5 +1,6 @@
 package com.ghosttrio.judomanager.user.application.service;
 
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.DAN_PROMOTION_BAD_REQUEST;
+import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.USER_STATE_BAD_REQUEST;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +29,15 @@ public class UpdateUserService {
     @Transactional
     public void updateStatus(Long userId) {
         UserDomain userDomain = loadUserService.findById(userId);
-        userDomain.updateStatus();
+        validateUserState(userDomain.getState());
+        userDomain.userDeactivate();
         userPersistencePort.save(userDomain);
+    }
+
+    private void validateUserState(UserState state) {
+        if (state != UserState.ACTIVATED) {
+            throw new JMException(USER_STATE_BAD_REQUEST);
+        }
     }
 
     @Transactional

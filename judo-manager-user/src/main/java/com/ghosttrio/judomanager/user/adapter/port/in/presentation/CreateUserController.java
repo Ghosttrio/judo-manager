@@ -21,7 +21,7 @@ public class CreateUserController {
 
 	private final CreateUserUseCase createUserUseCase;
 
-	@Operation(description = "User 를 생성합니다.")
+	@Operation(description = "유저를 생성합니다.")
 	@PostMapping("/signup")
 	public JMResponse<Void> signup(@RequestBody UserRequest.Create request) {
 		createUserUseCase.execute(request.toService());

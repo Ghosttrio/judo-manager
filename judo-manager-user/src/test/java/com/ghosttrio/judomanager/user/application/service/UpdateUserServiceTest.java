@@ -1,35 +1,25 @@
 package com.ghosttrio.judomanager.user.application.service;
 
+import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.MonkeySupport;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
-import com.ghosttrio.judomanager.user.domain.Belt;
 import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
-import net.jqwik.api.Arbitrary;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.annotation.Transactional;
 
-import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.DAN_PROMOTION_BAD_REQUEST;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UpdateUserServiceTest extends MonkeySupport {
@@ -44,6 +34,28 @@ public class UpdateUserServiceTest extends MonkeySupport {
     private CircuitBreakerFactory circuitBreakerFactory;
     @InjectMocks
     private UpdateUserService updateUserService;
+
+    @Test
+    void 활성화_상태_유저가_비활성화_되어야_한다() {
+        UserDomain userDomain = monkey.giveMeBuilder(UserDomain.class)
+                .set("state", UserState.ACTIVATED)
+                .sample();
+        when(loadUserService.findById(any(Long.class))).thenReturn(userDomain);
+        updateUserService.updateStatus(userDomain.getId());
+        verify(userPersistencePort).save(userDomain);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"DEACTIVATED", "DELETED"})
+    void 유저의_상태가_활성화_상태가_아니면_에러가_발생한다(UserState state) {
+        UserDomain userDomain = monkey.giveMeBuilder(UserDomain.class)
+                .set("state", state)
+                .sample();
+        when(loadUserService.findById(any(Long.class))).thenReturn(userDomain);
+
+        Exception exception = assertThrows(JMException.class, () -> updateUserService.updateStatus(userDomain.getId()));
+        assertEquals("유저의 비활성화는 활성화 상태의 유저만 요청할 수 있습니다.", exception.getMessage());
+    }
 
     @Test
     void 유저_아이디값을_입력하면_유저_승급이_되어야_한다() {
@@ -64,27 +76,5 @@ public class UpdateUserServiceTest extends MonkeySupport {
         assertThrows(JMException.class, () -> updateUserService.promotionGrade(userDomain.getId()));
     }
 
-    @Test
-    void 각_급과_단에_맞는_벨트가_설정되어야_한다() {
-        /**
-         *  9 ~ 6 급 흰띠
-         *  5급 노랑띠
-         *  4급 주황띠
-         *  3급 초록띠
-         *  2급 파랑띠
-         *  1급 갈색띠
-         *  1단 ~ 5단 검은띠
-         *  6단 ~ 8단 용띠
-         *  9단 ~ 10단 빨간띠
-         */
-
-        Grade[] grades = Grade.values();
-
-        for (int i=0; i<grades.length; i++) {
-            int ordinal = grades[i].ordinal();
-
-        }
-
-    }
 
 }

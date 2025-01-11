@@ -21,7 +21,7 @@ class CreateUserServiceTest extends MonkeySupport {
     private UserPersistencePort userPersistencePort;
 
     @Test
-    void signup() {
+    void 닉넴과_이메일이_중복되지_않으면_회원가입에_성공_해야_한다() {
         //given
         CreateUserServiceRequest request = monkey.giveMeOne(CreateUserServiceRequest.class);
         when(userPersistencePort.isDuplicateUser(request.email())).thenReturn(false);
@@ -31,4 +31,7 @@ class CreateUserServiceTest extends MonkeySupport {
         //then
         verify(userPersistencePort, times(1)).save(any(UserDomain.class));
     }
+
+
+
 }

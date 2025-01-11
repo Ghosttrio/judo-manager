@@ -17,6 +17,7 @@ public enum ErrorCode {
 	PASS_EXPIRED(BAD_REQUEST, "회원권이 만료되었습니다."),
 	PASSWORD_INCORRECT_REQUEST(BAD_REQUEST, "암호화 된 암호와 일치하지 않습니다."),
 	DAN_PROMOTION_BAD_REQUEST(BAD_REQUEST, "10단은 승급을 할 수 없습니다."),
+	USER_STATE_BAD_REQUEST(BAD_REQUEST, "유저의 비활성화는 활성화 상태의 유저만 요청할 수 있습니다."),
 
 	// 401 인증 오류
 	INVALID_BEARER_TOKEN(BAD_REQUEST, "유효한 Bearer 토큰의 형식이 아닙니다."),

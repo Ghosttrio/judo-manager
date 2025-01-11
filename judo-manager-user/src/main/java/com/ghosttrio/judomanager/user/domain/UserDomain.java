@@ -52,19 +52,6 @@ public class UserDomain {
         this.userProfile.updateNickname(nickname);
     }
 
-    public Belt promotion(Belt belt) {
-        Belt[] belts = Belt.values();
-        int currentIndex = belt.ordinal(); // 현재 벨트의 인덱스를 구함
-
-        // 벨트의 마지막이면 승급 불가 (최상위 벨트)
-        if (currentIndex == belts.length - 1) {
-            return belt; // 이미 최고 벨트인 경우, 현재 벨트를 그대로 반환
-        }
-
-        // 현재 벨트보다 상위 벨트를 반환
-        return belts[currentIndex + 1];
-    }
-
     public void setDojo(Long dojoId) {
         this.dojoId = dojoId;
     }
@@ -73,7 +60,7 @@ public class UserDomain {
         this.lastLoginDate = LocalDateTime.now();
     }
 
-    public void updateStatus() {
+    public void userDeactivate() {
         this.state = UserState.DEACTIVATED;
     }
 

@@ -19,10 +19,10 @@ public class WithdrawService {
      *  유저의 개인 정보만 삭제하고 데이터 자체는 유지
      */
     @Transactional
-    public void withdraw(Long userId){
+    public void withdrawUser(Long userId){
         UserDomain userDomain = userPersistencePort.findById(userId);
         deleteTokenInfo(userDomain);
-        withdraw(userDomain);
+        withdrawUser(userDomain);
     }
 
     private void deleteTokenInfo(UserDomain userDomain) {
@@ -30,7 +30,7 @@ public class WithdrawService {
         userRedisPort.deleteValues(email);
     }
 
-    private void withdraw(UserDomain userDomain) {
+    private void withdrawUser(UserDomain userDomain) {
         UserDomain withDrawUser = userDomain.withDrawUser();
         userPersistencePort.save(withDrawUser);
     }

@@ -14,6 +14,6 @@ public class WithdrawUseCaseImpl implements WithdrawUseCase {
 
     @Override
     public void execute(Long userId) {
-        withdrawService.withdraw(userId);
+        withdrawService.withdrawUser(userId);
     }
 }

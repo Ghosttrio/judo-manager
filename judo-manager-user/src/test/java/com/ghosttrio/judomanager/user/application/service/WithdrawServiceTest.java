@@ -7,6 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class WithdrawServiceTest {
 
     @Test
-    void withdraw() {
+    void withdrawUser() {
     }
 }

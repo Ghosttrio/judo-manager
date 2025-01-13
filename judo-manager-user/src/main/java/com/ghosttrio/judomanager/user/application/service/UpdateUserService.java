@@ -57,7 +57,7 @@ public class UpdateUserService {
     }
 
     @Transactional
-    public void update(Long userId, String dojoCode) {
+    public void updateDojoCode(Long userId, String dojoCode) {
         CircuitBreaker circuitbreaker = circuitBreakerFactory.create("userUpdateCB");
         Long dojoId = circuitbreaker.run(() -> findByDojoCode(dojoCode), throwable -> 0L);
 

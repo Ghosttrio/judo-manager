@@ -1,5 +1,6 @@
 package com.ghosttrio.judomanager.user.adapter.port.in.presentation;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class CreateUserController {
 
 	@Operation(description = "유저를 생성합니다.")
 	@PostMapping("/signup")
-	public JMResponse<Void> signup(@RequestBody UserRequest.Create request) {
+	public JMResponse<Void> signup(@Valid @RequestBody UserRequest.Create request) {
 		createUserUseCase.execute(request.toService());
 		return JMResponse.ok();
 	}

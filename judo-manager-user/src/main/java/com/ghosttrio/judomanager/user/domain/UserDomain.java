@@ -1,6 +1,5 @@
 package com.ghosttrio.judomanager.user.domain;
 
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -74,6 +73,11 @@ public class UserDomain {
             Grade grade,
             Belt belt
     ) {
+    }
+
+    public void updateGrade(Grade grade, Belt belt) {
+        this.grade = grade;
+        this.belt = belt;
     }
 
 }

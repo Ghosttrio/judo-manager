@@ -1,7 +1,6 @@
 package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity;
 
-import com.ghosttrio.judomanager.user.domain.Belt;
-import com.ghosttrio.judomanager.user.domain.Grade;
+import com.ghosttrio.judomanager.user.domain.*;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,12 +21,15 @@ public class UserEntity extends BaseEntity {
     private String nickname;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    private Long dojoId; // 본인이 속한 도장 id
     private String email; // 카카오 로그인 메일
-    private LocalDateTime lastLoginDate;
     private UserState state;
-    private Grade grade;
+    private LocalDateTime lastLoginDate;
+    private Long dojoId; // 본인이 속한 도장 id
+    @Enumerated(EnumType.STRING)
     private Belt belt;
-
-
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
+    private String location;
+    private Double latitude;
+    private Double longitude;
 }

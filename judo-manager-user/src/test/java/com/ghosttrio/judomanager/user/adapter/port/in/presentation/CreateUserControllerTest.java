@@ -2,7 +2,6 @@ package com.ghosttrio.judomanager.user.adapter.port.in.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ghosttrio.judomanager.user.adapter.port.in.presentation.model.request.UserRequest;
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserRole;
 import com.ghosttrio.judomanager.user.application.port.in.CreateUserUseCase;
 import com.ghosttrio.judomanager.user.common.MonkeySupport;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserRole.MASTER;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

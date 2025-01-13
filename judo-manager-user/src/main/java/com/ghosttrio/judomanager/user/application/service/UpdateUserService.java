@@ -1,6 +1,6 @@
 package com.ghosttrio.judomanager.user.application.service;
 
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
+import com.ghosttrio.judomanager.user.domain.UserState;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.exception.ErrorCode;
@@ -68,6 +68,13 @@ public class UpdateUserService {
 
     private Long findByDojoCode(String dojoCode) {
         return userClientPort.findDojoByDojoCode(dojoCode).getDojoId();
+    }
+
+    @Transactional
+    public void updateGrade(Long userId, Grade grade, Belt belt) {
+        UserDomain userDomain = loadUserService.findById(userId);
+        userDomain.updateGrade(grade, belt);
+        userPersistencePort.save(userDomain);
     }
 
     @Transactional

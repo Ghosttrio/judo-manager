@@ -1,40 +1,51 @@
 package com.ghosttrio.judomanager.user.mapper;
 
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserEntity;
+import com.ghosttrio.judomanager.user.domain.UserAddress;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
+import com.ghosttrio.judomanager.user.domain.UserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-    // todo 유저 도메인 수정 끝나면 한 번에 처리하기
-
-
     public UserDomain toDomain(UserEntity userEntity) {
-//        return new UserDomain(
-//                userEntity.getId(),
-//                userEntity.getNickname(),
-//                userEntity.getEmail(),
-//                userEntity.getRole(),
-//                userEntity.getState(),
-//                userEntity.getLastLoginDate(),
-//                userEntity.getCreatedAt(),
-//                userEntity.getUpdatedAt(),
-//                userEntity.getDojoId()
-//        );
-        return null;
+        UserAddress userAddress = UserAddress.createUserAddress(
+                userEntity.getLocation(),
+                userEntity.getLatitude(),
+                userEntity.getLongitude());
+
+        UserProfile userProfile = UserProfile.createUserProfile(userEntity.getNickname(),
+                userEntity.getEmail(),
+                userEntity.getRole(),
+                userAddress);
+
+        return new UserDomain(
+                userEntity.getId(),
+                userProfile,
+                userEntity.getState(),
+                userEntity.getLastLoginDate(),
+                userEntity.getCreatedAt(),
+                userEntity.getUpdatedAt(),
+                userEntity.getDojoId(),
+                userEntity.getBelt(),
+                userEntity.getGrade());
     }
 
     public UserEntity toEntity(UserDomain userDomain) {
-//        return new UserEntity(
-//                userDomain.getId(),
-//                userDomain.getNickname(),
-//                userDomain.getRole(),
-//                userDomain.getDojoId(),
-//                userDomain.getEmail(),
-//                userDomain.getLastLoginDate(),
-//                userDomain.getState()
-//        );
-        return null;
+        return new UserEntity(
+                userDomain.getId(),
+                userDomain.getUserProfile().getNickname(),
+                userDomain.getUserProfile().getRole(),
+                userDomain.getUserProfile().getEmail(),
+                userDomain.getState(),
+                userDomain.getLastLoginDate(),
+                userDomain.getDojoId(),
+                userDomain.getBelt(),
+                userDomain.getGrade(),
+                userDomain.getUserProfile().getUserAddress().getLocation(),
+                userDomain.getUserProfile().getUserAddress().getLatitude(),
+                userDomain.getUserProfile().getUserAddress().getLongitude()
+        );
     }
 }

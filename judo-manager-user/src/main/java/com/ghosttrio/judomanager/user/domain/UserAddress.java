@@ -1,7 +1,9 @@
 package com.ghosttrio.judomanager.user.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 public class UserAddress {
     private String location;

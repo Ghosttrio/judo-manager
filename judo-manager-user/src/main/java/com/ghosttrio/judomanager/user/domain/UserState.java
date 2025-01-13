@@ -1,4 +1,4 @@
-package com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity;
+package com.ghosttrio.judomanager.user.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

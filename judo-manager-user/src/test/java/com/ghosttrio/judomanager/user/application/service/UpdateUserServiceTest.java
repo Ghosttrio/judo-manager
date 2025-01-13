@@ -1,6 +1,6 @@
 package com.ghosttrio.judomanager.user.application.service;
 
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserState;
+import com.ghosttrio.judomanager.user.domain.UserState;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.MonkeySupport;

@@ -1,6 +1,7 @@
 package com.ghosttrio.judomanager.user.adapter.port.in.presentation;
 
 import com.ghosttrio.judomanager.user.domain.UserDomain;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class LoadUserController {
 	private final LoadUserUseCase loadUserUseCase;
 
 	@GetMapping("/{id}")
-	public JMResponse<UserDomain> loadUser(@PathVariable Long id) {
+	public JMResponse<UserDomain> loadUser(@NotNull @PathVariable Long id) {
 		UserDomain result = loadUserUseCase.execute(id);
 		return JMResponse.ok(result);
 	}

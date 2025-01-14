@@ -39,7 +39,7 @@ public class UpdateUserController {
 
     @Operation(summary = "유저의 상태 정보를 변경합니다.")
     @PatchMapping("/{userId}/status")
-    public JMResponse<Void> updateStatus(@PathVariable Long userId) {
+    public JMResponse<Void> updateStatus(@NotNull @PathVariable Long userId) {
         updateUserStatusUseCase.execute(userId);
         return JMResponse.ok();
     }

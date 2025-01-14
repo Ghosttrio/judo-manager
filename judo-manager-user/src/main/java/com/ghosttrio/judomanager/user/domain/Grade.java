@@ -2,15 +2,15 @@ package com.ghosttrio.judomanager.user.domain;
 
 
 public enum Grade {
-    KYU1,
-    KYU2,
-    KYU3,
-    KYU4,
-    KYU5,
-    KYU6,
-    KYU7,
-    KYU8,
     KYU9,
+    KYU8,
+    KYU7,
+    KYU6,
+    KYU5,
+    KYU4,
+    KYU3,
+    KYU2,
+    KYU1,
     DAN1,
     DAN2,
     DAN3,

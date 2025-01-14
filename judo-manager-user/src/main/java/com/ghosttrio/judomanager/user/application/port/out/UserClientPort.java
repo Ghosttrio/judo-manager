@@ -6,5 +6,4 @@ import com.ghosttrio.judomanager.user.domain.Grade;
 
 public interface UserClientPort {
     Dojo findDojoByDojoCode(String dojoCode);
-    Grade findUserGrade(Long userId);
 }

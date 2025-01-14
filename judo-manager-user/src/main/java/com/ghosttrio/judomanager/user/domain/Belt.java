@@ -16,7 +16,7 @@ public enum Belt {
     BLUE("파란띠"),
     BROWN("밤띠"),
     BLACK("검은띠"),
-    REA_AND_WHITE("용띠"),
+    RED_AND_WHITE("용띠"),
     RED("빨간띠");
     private final String beltName;
 
@@ -28,8 +28,8 @@ public enum Belt {
         promotionMap.put(6, Belt.GREEN);
         promotionMap.put(7, Belt.BLUE);
         promotionMap.put(8, Belt.BROWN);
-        promotionMap.put(13, Belt.BLACK);
-        promotionMap.put(15, Belt.REA_AND_WHITE);
+        promotionMap.put(9, Belt.BLACK);
+        promotionMap.put(14, Belt.RED_AND_WHITE);
         promotionMap.put(17, Belt.RED);
     }
 

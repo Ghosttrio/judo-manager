@@ -17,9 +17,4 @@ public class DojoClientAdapter implements UserClientPort {
     public Dojo findDojoByDojoCode(String dojoCode) {
         return dojoClient.findDojoByDojoCode(dojoCode);
     }
-
-    @Override
-    public Grade findUserGrade(Long userId) {
-        return null;
-    }
 }

@@ -14,7 +14,6 @@ public class UserRequest {
             String email,
             @NotEmpty(message = "닉네임은 필수입니다.")
             String nickname,
-            @NotEmpty(message = "역할은 필수입니다.")
             UserRole role,
             String location,
             Double latitude,

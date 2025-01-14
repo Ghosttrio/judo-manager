@@ -1,10 +1,12 @@
 package com.ghosttrio.judomanager.user.mapper;
 
+import com.ghosttrio.judomanager.user.adapter.port.in.presentation.model.response.UserResponse;
+import com.ghosttrio.judomanager.user.adapter.port.in.presentation.model.response.UserResponse.LoadUserResponse;
 import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserEntity;
-import com.ghosttrio.judomanager.user.domain.UserAddress;
-import com.ghosttrio.judomanager.user.domain.UserDomain;
-import com.ghosttrio.judomanager.user.domain.UserProfile;
+import com.ghosttrio.judomanager.user.domain.*;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 public class UserMapper {
@@ -34,6 +36,23 @@ public class UserMapper {
 
     public UserEntity toEntity(UserDomain userDomain) {
         return new UserEntity(
+                userDomain.getId(),
+                userDomain.getUserProfile().getNickname(),
+                userDomain.getUserProfile().getRole(),
+                userDomain.getUserProfile().getEmail(),
+                userDomain.getState(),
+                userDomain.getLastLoginDate(),
+                userDomain.getDojoId(),
+                userDomain.getBelt(),
+                userDomain.getGrade(),
+                userDomain.getUserProfile().getUserAddress().getLocation(),
+                userDomain.getUserProfile().getUserAddress().getLatitude(),
+                userDomain.getUserProfile().getUserAddress().getLongitude()
+        );
+    }
+
+    public LoadUserResponse toLoadUserResponse(UserDomain userDomain) {
+        return new LoadUserResponse(
                 userDomain.getId(),
                 userDomain.getUserProfile().getNickname(),
                 userDomain.getUserProfile().getRole(),

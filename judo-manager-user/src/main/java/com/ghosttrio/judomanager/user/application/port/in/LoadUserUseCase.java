@@ -1,7 +1,7 @@
 package com.ghosttrio.judomanager.user.application.port.in;
 
-import com.ghosttrio.judomanager.user.domain.UserDomain;
+import com.ghosttrio.judomanager.user.adapter.port.in.presentation.model.response.UserResponse.LoadUserResponse;
 
 public interface LoadUserUseCase {
-    UserDomain execute(Long id);
+    LoadUserResponse execute(Long id);
 }

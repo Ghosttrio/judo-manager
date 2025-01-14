@@ -30,7 +30,7 @@ public class UserDomain {
                 LocalDateTime.now(),
                 0L,
                 Belt.WHITE,
-                Grade.KYU1); // 0L은 미등록 도장 코드
+                Grade.KYU1);
     }
 
     @Builder

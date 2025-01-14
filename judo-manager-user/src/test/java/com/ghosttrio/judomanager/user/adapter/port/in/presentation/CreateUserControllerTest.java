@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,8 +38,9 @@ class CreateUserControllerTest extends MonkeySupport {
     @DisplayName("회원가입 성공 테스트")
     void 회원가입이_성공해야_한다() throws Exception {
         UserRequest.Create request = monkey.giveMeOne(UserRequest.Create.class);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/users/signup")
-                        .content(objectMapper.writeValueAsString(request))
+                        .content(objectMapper.writeValueAsString(request.toService()))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

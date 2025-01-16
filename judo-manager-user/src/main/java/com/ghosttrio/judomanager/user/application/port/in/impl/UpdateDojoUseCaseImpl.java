@@ -13,6 +13,6 @@ public class UpdateDojoUseCaseImpl implements UpdateDojoUseCase {
 
     @Override
     public void execute(Long userId, String dojoCode) {
-        updateUserService.update(userId, dojoCode);
+        updateUserService.updateDojoCode(userId, dojoCode);
     }
 }

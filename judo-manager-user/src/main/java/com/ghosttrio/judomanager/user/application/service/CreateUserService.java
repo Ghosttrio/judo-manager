@@ -1,13 +1,19 @@
 package com.ghosttrio.judomanager.user.application.service;
 
-import com.ghosttrio.judomanager.user.adapter.port.out.infrastructure.jpa.entity.UserRole;
+import com.ghosttrio.judomanager.user.adapter.port.in.presentation.model.request.UserRequest.Create.CreateUserServiceRequest;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
 import com.ghosttrio.judomanager.user.common.exception.ErrorCode;
 import com.ghosttrio.judomanager.user.common.exception.JMException;
+import com.ghosttrio.judomanager.user.domain.UserAddress;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
+import com.ghosttrio.judomanager.user.domain.UserProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.ghosttrio.judomanager.user.domain.UserAddress.createUserAddress;
+import static com.ghosttrio.judomanager.user.domain.UserDomain.generateUserDomain;
+import static com.ghosttrio.judomanager.user.domain.UserProfile.createUserProfile;
 
 
 @Service
@@ -16,15 +22,19 @@ public class CreateUserService {
 
     private final UserPersistencePort userPersistencePort;
 
-    /**
-     *  회원 가입할 때는 dojoCode를 받지 말고, 가입 후에 도장을 등록하는 방식으로 진행
-     */
     @Transactional
-    public void signup(String email, String nickname, UserRole role){
-        checkDuplicateEmail(email);
-        checkDuplicateNickname(nickname);
-        UserDomain userDomain = UserDomain.create(email, nickname, role);
+    public void signup(CreateUserServiceRequest request) {
+        checkDuplicateEmail(request.email());
+        checkDuplicateNickname(request.nickname());
+
+        UserProfile userProfile = generateUserProfile(request);
+        UserDomain userDomain = generateUserDomain(userProfile);
         userPersistencePort.save(userDomain);
+    }
+
+    private UserProfile generateUserProfile(CreateUserServiceRequest request) {
+        UserAddress userAddress = createUserAddress(request.location(), request.latitude(), request.longitude());
+        return createUserProfile(request.nickname(), request.email(), request.role(), userAddress);
     }
 
     private void checkDuplicateEmail(String email) {

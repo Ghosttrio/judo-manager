@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 
 import java.util.function.Supplier;
 
@@ -22,7 +22,7 @@ class DeleteBoardServiceTest {
     @Mock
     private BoardClientPort boardClientPort;
     @Mock
-    private CircuitBreakerFactory circuitBreakerFactory;
+    private Resilience4JCircuitBreakerFactory circuitBreakerFactory;
     @Mock
     private CircuitBreaker circuitBreaker;
     @InjectMocks
@@ -50,7 +50,7 @@ class DeleteBoardServiceTest {
     }
 
     @Test
-    public void 서킷브레이커를_거쳐서_게시글_정보를_삭제실패() {
+    void 서킷브레이커를_거쳐서_게시글_정보를_삭제실패() {
         Long boardId = 1L;
         when(circuitBreakerFactory.create("boardCB")).thenReturn(circuitBreaker);
         doThrow(new RuntimeException("서비스 에러")).when(circuitBreaker).run(any(Supplier.class));

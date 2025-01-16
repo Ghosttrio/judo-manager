@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.3.4'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'org.sonarqube' version '5.1.0.4882'
+    id 'jacoco'
 }
 
 group = 'com.ghosttrio.judomanager'
@@ -11,6 +12,13 @@ sonarqube {
     properties {
         property 'sonar.projectKey', 'judo-manager'
         property 'sonar.projectName', 'judo-manager'
+        property 'sonar.sources', 'src'
+        property 'sonar.language', 'java'
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property 'sonar.test.inclusions', '**/*Test.java'
+        property 'sonar.exclusions', '**/test/**, **/Q*.java, **/*Doc*.java, **/resources/** ,**/*Application*.java , **/*Config*.java,' +
+                '**/*Dto*.java, **/*Request*.java, **/*Response*.java ,**/*Exception*.java ,**/*ErrorCode*.java'
+        property 'sonar.java.coveragePlugin', 'jacoco'
     }
 }
 
@@ -96,4 +104,86 @@ clean {
 }
 
 
+jacoco {
+    toolVersion = '0.8.7'
+}
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            // 'element'가 없으면 프로젝트의 전체 파일을 합친 값을 기준으로 합니다.
+            // 위의 리포트에서 'Total'로 표시된 부분입니다.
+            limit {
+                // 'counter'를 지정하지 않으면 default는 'INSTRUCTION'
+                // 'value'를 지정하지 않으면 default는 'COVEREDRATIO'
+                minimum = 0.30
+            }
+        }
 
+        // 여러 룰을 생성할 수 있습니다.
+        rule {
+            // 룰을 간단히 켜고 끌 수 있습니다.
+            enabled = true
+
+            // 룰을 체크할 단위는 클래스 단위
+            element = 'CLASS'
+
+            // 브랜치 커버리지를 최소한 90% 만족시켜야 합니다.
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
+
+            // 라인 커버리지를 최소한 80% 만족시켜야 합니다.
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+
+            // 빈 줄을 제외한 코드의 라인수를 최대 200라인으로 제한합니다.
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 200
+            }
+        }
+    }
+}
+test {
+    // finalizedBy : 이(test) 작업에 대해 주어진 종료자 작업을 추가
+    finalizedBy jacocoTestReport // test 작업이 끝나고 jacocoTestReport를 실행
+}
+jacocoTestReport {
+    // dependsOn : 이 작업에 지정된 종속성을 추가
+    dependsOn test // jacocoTestReport 에 test라는 종속성을 추가
+
+    def Qdomains = []
+
+    for (qPattern in '**/QA'..'**/QZ') {
+        Qdomains.add(qPattern + '*')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect {
+                    fileTree(dir: it, excludes: [
+                            "**/*Application*",
+                            "**/*Config*",
+                            "**/*Dto*",
+                            "**/*Request*",
+                            "**/*Response*",
+                            "**/*Interceptor*",
+                            "**/*Exception*"
+                    ] + Qdomains)
+                })
+        )
+    }
+}

@@ -1,13 +1,22 @@
 package com.ghosttrio.judomanager.user.application.service;
 
+import com.ghosttrio.judomanager.user.domain.UserState;
 import com.ghosttrio.judomanager.user.application.port.out.UserClientPort;
 import com.ghosttrio.judomanager.user.application.port.out.UserPersistencePort;
+import com.ghosttrio.judomanager.user.common.exception.ErrorCode;
+import com.ghosttrio.judomanager.user.common.exception.JMException;
+import com.ghosttrio.judomanager.user.domain.Belt;
+import com.ghosttrio.judomanager.user.domain.Grade;
 import com.ghosttrio.judomanager.user.domain.UserDomain;
+import com.ghosttrio.judomanager.user.domain.UserDomain.PromotionResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.DAN_PROMOTION_BAD_REQUEST;
+import static com.ghosttrio.judomanager.user.common.exception.ErrorCode.USER_STATE_BAD_REQUEST;
 
 @Service
 @RequiredArgsConstructor
@@ -21,34 +30,36 @@ public class UpdateUserService {
     @Transactional
     public void updateStatus(Long userId) {
         UserDomain userDomain = loadUserService.findById(userId);
-        userDomain.updateStatus();
+        validateUserState(userDomain.getState());
+        userDomain.userDeactivate();
         userPersistencePort.save(userDomain);
     }
 
-
-//    @Transactional
-//    public void lastLogin(Long userId) {
-//        UserEntity userEntity = loadUserService.findById(userId);
-//        userEntity.updateLoginDate();
-//    }
+    private void validateUserState(UserState state) {
+        if (state != UserState.ACTIVATED) {
+            throw new JMException(USER_STATE_BAD_REQUEST);
+        }
+    }
 
     @Transactional
     public void updateNickname(Long userId, String nickname) {
+        checkDuplicateNickname(nickname);
         UserDomain userDomain = loadUserService.findById(userId);
-        userDomain.updateNickname(nickname);
+        userDomain.changeUserNickname(nickname);
         userPersistencePort.save(userDomain);
     }
 
+    private void checkDuplicateNickname(String nickname) {
+        boolean isDuplicate = userPersistencePort.isDuplicateNickname(nickname);
+        if (isDuplicate) {
+            throw new JMException(ErrorCode.EMAIL_DUPLICATE);
+        }
+    }
+
     @Transactional
-    public void update(Long userId, String dojoCode) {
-
-        // 서킷 브레이커 적용 전
-//        Long dojoId = findByDojoCode(dojoCode);
-
-        // 서킷 브레이커 적용 후
-        CircuitBreaker circuitebreaker = circuitBreakerFactory.create("circuitebreaker");
-        Long dojoId = circuitebreaker.run(() -> findByDojoCode(dojoCode), throwable -> 0L);
-
+    public void updateDojoCode(Long userId, String dojoCode) {
+        CircuitBreaker circuitbreaker = circuitBreakerFactory.create("userUpdateCB");
+        Long dojoId = circuitbreaker.run(() -> findByDojoCode(dojoCode), throwable -> 0L);
 
         UserDomain userDomain = loadUserService.findById(userId);
         userDomain.setDojo(dojoId);
@@ -59,4 +70,26 @@ public class UpdateUserService {
         return userClientPort.findDojoByDojoCode(dojoCode).getDojoId();
     }
 
+    @Transactional
+    public void updateGrade(Long userId, Grade grade, Belt belt) {
+        UserDomain userDomain = loadUserService.findById(userId);
+        userDomain.updateGrade(grade, belt);
+        userPersistencePort.save(userDomain);
+    }
+
+    @Transactional
+    public Grade promotionGrade(Long userId) {
+        UserDomain userDomain = loadUserService.findById(userId);
+        validateUserDan(userDomain.getGrade());
+        PromotionResult promotionResult = userDomain.promotionGrade();
+        Grade promotionGrade = promotionResult.grade();
+        Belt promotionBelt = promotionResult.belt();
+        userPersistencePort.updateUserDan(userId, promotionGrade, promotionBelt);
+        // todo 알림 메시지 보내기
+        return promotionGrade;
+    }
+
+    private void validateUserDan(Grade grade) {
+        if (Grade.DAN10 == grade) throw new JMException(DAN_PROMOTION_BAD_REQUEST);
+    }
 }

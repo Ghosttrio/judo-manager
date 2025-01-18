@@ -1,7 +1,6 @@
 package com.ghosttrio.judomanager.attendance.adapter.port.out.jpa.repository;
 
 import com.ghosttrio.judomanager.attendance.adapter.port.out.jpa.entity.AttendanceEntity;
-import com.ghosttrio.judomanager.attendance.domain.Attendance;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;

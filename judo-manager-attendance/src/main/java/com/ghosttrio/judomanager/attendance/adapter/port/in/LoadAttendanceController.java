@@ -1,9 +1,8 @@
 package com.ghosttrio.judomanager.attendance.adapter.port.in;
 
 import com.ghosttrio.judomanager.attendance.application.port.in.LoadAttendanceUseCase;
-import com.ghosttrio.judomanager.attendance.application.service.LoadAttendanceService;
 import com.ghosttrio.judomanager.attendance.common.exception.JMResponse;
-import com.ghosttrio.judomanager.attendance.domain.Attendance;
+import com.ghosttrio.judomanager.attendance.domain.AttendanceDomain;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +23,9 @@ public class LoadAttendanceController {
 
     @GetMapping
     @Operation(summary = "유저의 출석 정보를 불러옵니다.")
-    public JMResponse<Attendance> loadUserAttendance(@RequestParam Long userId){
-        Attendance attendance = loadAttendanceUseCase.execute(userId);
-        return JMResponse.ok(attendance);
+    public JMResponse<AttendanceDomain> loadUserAttendance(@RequestParam Long userId){
+        AttendanceDomain attendanceDomain = loadAttendanceUseCase.execute(userId);
+        return JMResponse.ok(attendanceDomain);
     }
 
 

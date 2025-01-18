@@ -3,7 +3,7 @@ package com.ghosttrio.judomanager.attendance.adapter.port.out.jpa;
 import com.ghosttrio.judomanager.attendance.adapter.port.out.jpa.entity.AttendanceEntity;
 import com.ghosttrio.judomanager.attendance.adapter.port.out.jpa.repository.AttendanceRepository;
 import com.ghosttrio.judomanager.attendance.application.port.out.AttendanceJpaPort;
-import com.ghosttrio.judomanager.attendance.domain.Attendance;
+import com.ghosttrio.judomanager.attendance.domain.AttendanceDomain;
 import com.ghosttrio.judomanager.attendance.mapper.AttendanceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class AttendanceJpaAdapter implements AttendanceJpaPort {
     }
 
     @Override
-    public Optional<Attendance> findAttendanceByUserId(Long userId) {
+    public Optional<AttendanceDomain> findAttendanceByUserId(Long userId) {
         Optional<AttendanceEntity> attendanceEntity = attendanceRepository.findAttendanceByUserId(userId);
         return attendanceEntity.map(attendanceMapper::toDomain);
     }

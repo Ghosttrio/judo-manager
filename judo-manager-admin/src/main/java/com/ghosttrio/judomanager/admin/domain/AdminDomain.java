@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class Admin {
+public class AdminDomain {
 	private Long id;
 	private String adminId;
 	private String password;

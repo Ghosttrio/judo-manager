@@ -1,9 +1,8 @@
 package com.ghosttrio.judomanager.attendance.application.service;
 
-import com.ghosttrio.judomanager.attendance.adapter.port.out.jpa.repository.AttendanceRepository;
 import com.ghosttrio.judomanager.attendance.application.port.out.AttendanceJpaPort;
 import com.ghosttrio.judomanager.attendance.common.exception.JMException;
-import com.ghosttrio.judomanager.attendance.domain.Attendance;
+import com.ghosttrio.judomanager.attendance.domain.AttendanceDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,10 +25,9 @@ import static com.ghosttrio.judomanager.attendance.common.exception.ErrorCode.AT
 @Transactional(readOnly = true)
 public class LoadAttendanceService {
 
-
     private final AttendanceJpaPort attendanceJpaPort;
 
-    public Attendance loadAttendance(Long userId){
+    public AttendanceDomain loadAttendance(Long userId){
         return attendanceJpaPort.findAttendanceByUserId(userId)
                 .orElseThrow(() -> new JMException(ATTENDANCE_NOT_FOUND));
     }

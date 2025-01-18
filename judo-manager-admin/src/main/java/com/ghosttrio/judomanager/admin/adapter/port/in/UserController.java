@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @Operation(summary = "특정 회원을 비활성화(벤) 상태로 만든다.")
-    @PatchMapping
-    public JMResponse<Void> banUser(@RequestParam Long userId) {
+    @PatchMapping("/{userId}")
+    public JMResponse<Void> banUser(@PathVariable Long userId) {
         userBanUseCase.execute(userId);
         return JMResponse.ok();
     }

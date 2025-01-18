@@ -61,15 +61,15 @@ public class AuthorizationFilter extends AbstractGatewayFilterFactory<Config> {
                 throw new JudoManagerGatewayException(EMPTY_TOKEN);
             }
         } catch (ExpiredJwtException e) {
-            log.error("Expired JWT Token");
+            log.error("Expired JWT Token", e);
         } catch (MalformedJwtException e) {
-            log.error("Invalid JWT token.");
+            log.error("Invalid JWT token.", e);
         } catch (UnsupportedJwtException e) {
-            log.error("Unsupported JWT token.");
+            log.error("Unsupported JWT token.", e);
         } catch (IllegalArgumentException e) {
-            log.error("JWT claims string is empty.");
+            log.error("JWT claims string is empty.", e);
         } catch (NullPointerException e) {
-            log.error("JWT Token is empty.");
+            log.error("JWT Token is empty.", e);
         }
     }
 

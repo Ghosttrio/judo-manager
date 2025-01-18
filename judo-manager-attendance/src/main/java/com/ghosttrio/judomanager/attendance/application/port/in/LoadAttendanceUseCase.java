@@ -1,7 +1,7 @@
 package com.ghosttrio.judomanager.attendance.application.port.in;
 
-import com.ghosttrio.judomanager.attendance.domain.Attendance;
+import com.ghosttrio.judomanager.attendance.domain.AttendanceDomain;
 
 public interface LoadAttendanceUseCase {
-    Attendance execute(Long userId);
+    AttendanceDomain execute(Long userId);
 }

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ghosttrio.judomanager.admin.adapter.port.out.feign.dojo.model.Dojo;
 
-@FeignClient(
-	name = "DojoFeignClient", url = "http://localhost:8080/api/v1/dojos"
-)
+@FeignClient(name = "DojoFeignClient", url = "http://localhost:8080/api/v1/dojos")
 public interface DojoFeignClient {
 
 	@GetMapping

@@ -23,8 +23,8 @@ public class CreateAttendanceController {
 
 	private final CreateAttendanceUseCase createAttendanceUseCase;
 
-	@PostMapping
 	@Operation(summary = "유저가 출석 정보를 생성합니다.")
+	@PostMapping
 	public JMResponse<Void> createAttendance(@RequestBody CreateAttendanceRequest request) {
 		createAttendanceUseCase.execute(request.userId(), request.dojoId(), request.latitude(), request.longitude());
 		return JMResponse.ok();

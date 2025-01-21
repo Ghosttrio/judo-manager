@@ -18,7 +18,6 @@ public class DeleteBoardService {
 
     @Transactional
     public void delete(Long boardId) {
-
         CircuitBreaker cb = circuitBreakerFactory.create("boardCB");
         Supplier<Void> deleteAction = () -> {
             executeDelete(boardId);
@@ -31,5 +30,3 @@ public class DeleteBoardService {
         boardClientPort.deleteById(boardId);
     }
 }
-
-

@@ -46,6 +46,5 @@ class LoadBoardServiceTest extends MonkeySupport {
         when(circuitBreakerFactory.create("boardCB")).thenReturn(circuitBreaker);
         when(circuitBreaker.run(any(), any())).thenThrow(new RuntimeException("Service unavailable"));
         assertThrows(Exception.class, () -> loadBoardService.findAllByBoardId(boardId));
-
     }
 }

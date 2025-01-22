@@ -77,6 +77,8 @@ dependencies {
     // zipkin
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+    // fixture monkey
+    testImplementation 'com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.0'
 }
 
 dependencyManagement {

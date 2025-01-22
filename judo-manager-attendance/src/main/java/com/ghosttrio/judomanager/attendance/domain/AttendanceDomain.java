@@ -22,7 +22,7 @@ public class AttendanceDomain {
         return new AttendanceDomain(null, userId, dojoId, Approval.APPROVED, attendanceTime);
     }
 
-    public void setApproval(Approval approval) {
+    public void setApproval() {
         this.approval = Approval.APPROVED;
     }
 

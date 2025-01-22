@@ -4,4 +4,5 @@ import com.ghosttrio.judomanager.admin.adapter.port.out.feign.dojo.model.DojoSta
 
 public record UpdateDojoRequest(
         DojoState state
-){}
+) {
+}

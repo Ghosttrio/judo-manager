@@ -10,14 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
-import java.security.SignatureException;
 import java.util.List;
 import java.util.Objects;
 
-import static com.ghostrio.judomanager.apigateway.error.GatewayErrorCode.AUTHORIZATION_HEADER_NOT_FOUND;
-import static com.ghostrio.judomanager.apigateway.error.GatewayErrorCode.EMPTY_TOKEN;
+import static com.ghostrio.judomanager.apigateway.error.GatewayErrorCode.*;
 import static com.ghostrio.judomanager.apigateway.filter.AuthorizationFilter.Config;
 
 @Slf4j
@@ -34,7 +33,8 @@ public class AuthorizationFilter extends AbstractGatewayFilterFactory<Config> {
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            HttpHeaders headers = exchange.getRequest().getHeaders();
+            ServerHttpRequest request = exchange.getRequest();
+            HttpHeaders headers = request.getHeaders();
             validateHeader(headers);
             validateJwt(headers);
             return chain.filter(exchange);
@@ -48,31 +48,33 @@ public class AuthorizationFilter extends AbstractGatewayFilterFactory<Config> {
     }
 
     private void validateJwt(HttpHeaders headers) {
-        List<String> authorizations = headers.get(HttpHeaders.AUTHORIZATION);
-        String authorizationHeader = Objects.requireNonNull(authorizations).get(0);
-        String token = authorizationHeader.replace("Bearer", "");
         try {
-            String subject = Jwts.parser()
-                    .setSigningKey(jwtTokenProperty.getSecret())
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
-            if (subject == null || subject.isEmpty()) {
-                throw new JudoManagerGatewayException(EMPTY_TOKEN);
-            }
-        } catch (ExpiredJwtException e) {
-            log.error("Expired JWT Token", e);
-        } catch (MalformedJwtException e) {
-            log.error("Invalid JWT token.", e);
-        } catch (UnsupportedJwtException e) {
-            log.error("Unsupported JWT token.", e);
-        } catch (IllegalArgumentException e) {
-            log.error("JWT claims string is empty.", e);
-        } catch (NullPointerException e) {
-            log.error("JWT Token is empty.", e);
+            checkTokenValue(extractToken(headers));
+        } catch (ExpiredJwtException |
+                 MalformedJwtException |
+                 UnsupportedJwtException |
+                 IllegalArgumentException |
+                 NullPointerException e) {
+            throw new JudoManagerGatewayException(INVALID_TOKEN);
         }
     }
 
+    private String extractToken(HttpHeaders headers) {
+        List<String> authorizations = headers.get(HttpHeaders.AUTHORIZATION);
+        String authorizationHeader = Objects.requireNonNull(authorizations).get(0);
+        return authorizationHeader.replace("Bearer", "");
+    }
+
+    private void checkTokenValue(String token) {
+        String subject = Jwts.parser()
+                .setSigningKey(jwtTokenProperty.getSecret())
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+        if (subject == null || subject.isEmpty()) {
+            throw new JudoManagerGatewayException(EMPTY_TOKEN);
+        }
+    }
 
     public static class Config {
     }
